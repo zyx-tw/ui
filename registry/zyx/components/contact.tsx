@@ -1,42 +1,44 @@
-import Link from "next/link"
-import { FaEnvelope } from "react-icons/fa"
-import { SiDiscord, SiGithub, SiInstagram } from "react-icons/si"
+"use client"
 
-const CONTACTS = [
-  {
-    href: "https://www.instagram.com/__zyx1121__",
-    icon: SiInstagram,
-    label: "Instagram",
-  },
-  { href: "https://discord.gg/2xcxmWjY", icon: SiDiscord, label: "Discord" },
-  { href: "https://github.com/zyx1121", icon: SiGithub, label: "GitHub" },
-  {
-    href: "mailto:yongxiang.zhan@outlook.com",
-    icon: FaEnvelope,
-    label: "Email",
-  },
-] as const
+import Link from "next/link"
+import { motion } from "motion/react"
+
+import { useInView } from "@workspace/ui/hooks/use-in-view"
+
+const EMAIL = "mail@zyx.tw"
+
+const spring = { type: "spring" as const, stiffness: 200, damping: 20 }
 
 export function Contact() {
+  const { ref, inView } = useInView()
+
   return (
-    <section className="flex min-h-dvh w-dvw flex-col items-center justify-center px-8 py-32">
-      <div className="mx-auto w-full max-w-4xl space-y-8 font-mono">
-        <h2 className="text-3xl font-bold md:text-4xl">Find me here 🔗</h2>
-        <div className="flex flex-wrap gap-8 md:gap-10">
-          {CONTACTS.map(({ href, icon: Icon, label }) => (
-            <Link
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="duration-base inline-flex flex-col items-center gap-2 text-muted-foreground transition-transform ease-glide hover:scale-125 hover:rotate-6 hover:text-brand"
-            >
-              <Icon className="h-8 w-8 md:h-10 md:w-10" />
-            </Link>
-          ))}
-        </div>
-      </div>
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      aria-label="Contact"
+      className="flex h-dvh w-dvw flex-col items-center justify-center gap-6 px-6 text-center"
+    >
+      <motion.h2
+        initial={{ opacity: 0, y: 16 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={spring}
+        className="text-2xl font-medium sm:text-3xl"
+      >
+        <Link
+          href={`mailto:${EMAIL}`}
+          className="underline underline-offset-8 transition-colors hover:text-brand"
+        >
+          {EMAIL}
+        </Link>
+      </motion.h2>
+      <motion.p
+        initial={{ opacity: 0, y: 16 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ ...spring, delay: 0.1 }}
+        className="max-w-md text-sm text-muted-foreground"
+      >
+        Can&apos;t promise a reply, but the door&apos;s open.
+      </motion.p>
     </section>
   )
 }
