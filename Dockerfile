@@ -1,19 +1,15 @@
-# syntax=docker/dockerfile:1
-# ui.zyx.tw as a container: the static export behind Caddy (apps/ui/Caddyfile).
-# Build from the repository root: docker build -f apps/ui/Dockerfile .
-
-FROM node:24-slim AS build
-COPY --from=oven/bun:1.3.13 /usr/local/bin/bun /usr/local/bin/bun
-WORKDIR /repo
-COPY . .
+FROM node:24-alpine AS build
+# bun installs and builds the registry; node runs `next build` itself.
+COPY --from=oven/bun:1.4.5-alpine /usr/local/bin/bun /usr/local/bin/bun
+WORKDIR /app
+COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
+COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN cd apps/ui && bun run build
+RUN bun run build
 
+# The static export behind Caddy (Caddyfile: clean URLs, Markdown twins, CORS).
 FROM caddy:2.10-alpine
-LABEL org.opencontainers.image.source=https://github.com/zyx1121/www.zyx.tw
-COPY apps/ui/Caddyfile /etc/caddy/Caddyfile
-COPY --from=build /repo/apps/ui/out /srv
+COPY Caddyfile /etc/caddy/Caddyfile
+COPY --from=build /app/out /srv
 EXPOSE 3000
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s \
-  CMD ["wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/llms.txt"]

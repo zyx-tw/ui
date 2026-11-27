@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { cn } from "@workspace/ui/lib/utils";
-import { column, enterRow, page } from "@workspace/ui/lib/layout";
+import { cn } from "@/registry/zyx/lib/utils";
+import { column, enterRow, page } from "@/registry/zyx/lib/layout";
 
 import Link from "next/link";
 

@@ -6,15 +6,15 @@ import {
   Ascii,
   textField,
   type AsciiLook,
-} from "@workspace/ui/components/ascii";
+} from "@/registry/zyx/components/ascii";
 import {
   BlockColumns,
   BrailleChart,
   Meter,
   Sparkline,
-} from "@workspace/ui/components/glyph-chart";
-import { Frame } from "@workspace/ui/components/ui/frame";
-import { Toggle } from "@workspace/ui/components/ui/toggle";
+} from "@/registry/zyx/components/glyph-chart";
+import { Frame } from "@/registry/zyx/components/ui/frame";
+import { Toggle } from "@/registry/zyx/components/ui/toggle";
 
 const looks: AsciiLook[] = [
   "classic",

@@ -7,7 +7,14 @@ const config = {
   printWidth: 80,
   plugins: ["prettier-plugin-tailwindcss"],
   tailwindFunctions: ["cn", "cva"],
-  tailwindStylesheet: "../../packages/ui/src/styles/globals.css",
+  tailwindStylesheet: "registry/zyx/styles/globals.css",
+  // The registry source keeps the style it ships in (no semicolons).
+  overrides: [
+    {
+      files: "registry/zyx/{agent,components,fonts,hooks,lib,styles}/**",
+      options: { semi: false },
+    },
+  ],
 };
 
 export default config;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { cn } from "@workspace/ui/lib/utils";
-import { column } from "@workspace/ui/lib/layout";
+import { cn } from "@/registry/zyx/lib/utils";
+import { column } from "@/registry/zyx/lib/layout";
 
 import { Hero } from "@/components/hero";
 import { Showcase } from "@/components/showcase";

@@ -5,7 +5,7 @@ import {
   OG_CONTENT_TYPE,
   OG_SIZE,
   ZyxOgImage,
-} from "@workspace/ui/components/og-image";
+} from "@/registry/zyx/components/og-image";
 
 // Rendered once at build time: this app is a static export.
 export const dynamic = "force-static";

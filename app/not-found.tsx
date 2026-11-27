@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { RequestedPath } from "@workspace/ui/components/shell";
-import { StatusPage } from "@workspace/ui/components/status-page";
-import { cn } from "@workspace/ui/lib/utils";
-import { column, enterRow, page } from "@workspace/ui/lib/layout";
+import { RequestedPath } from "@/registry/zyx/components/shell";
+import { StatusPage } from "@/registry/zyx/components/status-page";
+import { cn } from "@/registry/zyx/lib/utils";
+import { column, enterRow, page } from "@/registry/zyx/lib/layout";
 
 import { LLMS_PATH, MARKDOWN_PATH } from "@/lib/site";
 

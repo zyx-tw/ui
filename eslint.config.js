@@ -1,4 +1,4 @@
-import { nextJsConfig } from "@workspace/eslint-config/next-js";
+import { nextJsConfig } from "./eslint.next.js";
 
 export default [
   ...nextJsConfig,

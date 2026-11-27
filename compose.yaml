@@ -1,0 +1,31 @@
+# ui on Docker Compose: one Caddy container with the static export.
+#
+#   cp .env.example .env
+#   docker compose up -d
+#
+# The web port binds to 127.0.0.1: put a reverse proxy with TLS in front.
+name: ui
+
+services:
+  web:
+    image: ghcr.io/zyx-tw/ui:${UI_VERSION:-latest}
+    init: true
+    stop_grace_period: 3s
+    restart: unless-stopped
+    ports:
+      - "${UI_BIND:-127.0.0.1:3000}:3000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "-q",
+          "-O",
+          "/dev/null",
+          "http://127.0.0.1:3000/llms.txt",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+      start_interval: 1s
