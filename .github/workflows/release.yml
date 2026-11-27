@@ -1,0 +1,19 @@
+name: release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ship:
+    uses: zyx1121/.github/.github/workflows/ship.yml@main
+    permissions:
+      contents: read
+      packages: write
+      actions: read
+      id-token: write
+    with:
+      images: '["ghcr.io/zyx-tw/ui"]'
+      target: land
+      tenant: compose
+      app: ui

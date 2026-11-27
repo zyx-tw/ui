@@ -5,7 +5,7 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "../../packages/ui/src/styles/globals.css",
+    "css": "registry/zyx/styles/globals.css",
     "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
@@ -15,7 +15,7 @@
   "aliases": {
     "components": "@/components",
     "utils": "cn",
-    "ui": "@workspace/ui/components/ui",
+    "ui": "@/registry/zyx/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },

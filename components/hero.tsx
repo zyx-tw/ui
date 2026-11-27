@@ -1,5 +1,5 @@
-import { cn } from "@workspace/ui/lib/utils";
-import { enterRow } from "@workspace/ui/lib/layout";
+import { cn } from "@/registry/zyx/lib/utils";
+import { enterRow } from "@/registry/zyx/lib/layout";
 
 import { SITE_NAME, TAGLINE } from "@/lib/site";
 

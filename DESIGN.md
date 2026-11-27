@@ -8,11 +8,11 @@ This file is the design contract for every zyx.tw app. `bun run theme:check` and
 
 ## Architecture
 
-- **One source**: the components live in `packages/ui/src/components/ui/`. Every app in this repo imports them from `@workspace/ui/components/ui/<name>`; no app keeps its own copy.
-- **One stylesheet**: `packages/ui/src/styles/globals.css` holds the tokens, the utilities and the keyframes. Every app imports `@workspace/ui/globals.css`. An app may add a stylesheet only for its own content, never to restyle a component.
-- **The registry**: `apps/ui/registry.json` publishes the same files to projects outside this repo. `registry/zyx/ui` is a symlink to `packages/ui/src/components/ui`, and `shadcn build` writes `public/r/` from it. The `base` item (`registry:base`, `extends: "none"`) carries the tokens, utilities and fonts; `shadcn init https://ui.zyx.tw/r/base.json` sets up a project and registers `@zyx1121`.
+- **One source**: the components live in `registry/zyx/components/ui/`. Other projects install them from the registry as `@zyx1121/<name>`.
+- **One stylesheet**: `registry/zyx/styles/globals.css` holds the tokens, the utilities and the keyframes. The registry's `base` item ships it. An app may add a stylesheet only for its own content, never to restyle a component.
+- **The registry**: `registry.json` publishes the same files to projects outside this repo. `shadcn build` writes `public/r/` from it. The `base` item (`registry:base`, `extends: "none"`) carries the tokens, utilities and fonts; `shadcn init https://ui.zyx.tw/r/base.json` sets up a project and registers `@zyx1121`.
 - **In sync by check**: `theme:check` fails when globals.css and the `base` item (plus the components' keyframes and animations) drift. CI also inits a fresh project from the built base, adds every component and builds it.
-- **Components import each other relatively** (`./button`), so the files work both in `packages/ui` and in a project's `components/ui`. `cn` comes from `lib/utils` (`../../lib/utils`), which extends the `cn` package so the four type sizes survive next to a text color.
+- **Components import each other relatively** (`./button`), so the files work both here and in a project's `components/ui`. `cn` comes from `lib/utils` (`../../lib/utils`), which extends the `cn` package so the four type sizes survive next to a text color.
 
 ## Tokens
 
@@ -33,7 +33,7 @@ There is no `secondary`, `accent` or `card` (they duplicated `muted` or `backgro
 
 - **Data hues, never chrome**: `data-low` (green), `data-mid` (amber) and `data-high` (red) color only a mark whose color is the value: a meter's fill, a chart's line by height, a status dot. Frames, labels, numbers and controls stay grayscale, and the value is always written too, so the hue is never the only label. They are the same in both themes. `tokens:check` rejects them, Tailwind palette colors (`bg-gray-500`, `bg-black`) and color literals. The few literals that are content rather than chrome (Open Graph images, a scene's background color) are waived file by file in `scripts/check-tokens.mjs`, each with its reason.
 
-- **Dark first, soft extremes**: every app server-renders `<html class="dark">` and starts dark (`ThemeProvider` from `@workspace/ui/components/theme-provider`); the `d` key toggles. There is no pure white or pure black: dark sits on near black (`oklch(0.17 0 0)`) with text at `oklch(0.88 0 0)`, light on warm paper (`oklch(0.97 0.005 85)`) with text at `oklch(0.25 0 0)`. Contrast is about 14:1 (WCAG AAA asks for 7:1).
+- **Dark first, soft extremes**: every app server-renders `<html class="dark">` and starts dark (`ThemeProvider` from `@/components/theme-provider`); the `d` key toggles. There is no pure white or pure black: dark sits on near black (`oklch(0.17 0 0)`) with text at `oklch(0.88 0 0)`, light on warm paper (`oklch(0.97 0.005 85)`) with text at `oklch(0.25 0 0)`. Contrast is about 14:1 (WCAG AAA asks for 7:1).
 - **Primary is the text color**: `primary` equals `foreground` and `primary-foreground` equals `background`, so the main action is an inverted block, as a terminal highlights.
 - **Muted text at 4.5:1**: `muted-foreground` reaches at least 4.5:1 on `background` and `muted` in both themes: light `oklch(0.52 0 0)`, dark `oklch(0.62 0 0)`. Readable text never goes lighter (no `text-muted-foreground/50`); disabled controls are the only exception.
 - **Focus is the text color**: `ring` equals `foreground`, so focus is a box in the text color, not a soft gray ring.
@@ -52,7 +52,7 @@ Four sizes by role, the same on phones and desktops. Tailwind's own sizes are cl
 
 - **Hierarchy by weight and color**: 400 for text, 500 for titles, section headings, labels and buttons. Secondary text is `text-muted-foreground`.
 - **CSS** may only name the scale: `font-size: var(--text-body); line-height: var(--text-body--line-height)`.
-- **One face**: Maple Mono NF CN sets everything, text, headings and code alike (`font-sans`, `font-heading` and `font-mono` are the same stack). Every glyph keeps its cell (0.6em), a Han character two, so text lines up on a character grid and digits never shift. The files are subset to Latin, symbols, box drawing and the Han characters the apps use (`packages/ui/src/fonts/README.md`); other Han characters fall back to Noto Sans TC. Projects outside this repo load the same files from `https://ui.zyx.tw/fonts/`. That stylesheet also covers every other Han character in the face, in slices a page downloads only when its text needs them, so data in Chinese is set in the same face.
+- **One face**: Maple Mono NF CN sets everything, text, headings and code alike (`font-sans`, `font-heading` and `font-mono` are the same stack). Every glyph keeps its cell (0.6em), a Han character two, so text lines up on a character grid and digits never shift. The files are subset to Latin, symbols, box drawing and the Han characters the apps use (`registry/zyx/fonts/README.md`); other Han characters fall back to Noto Sans TC. Projects outside this repo load the same files from `https://ui.zyx.tw/fonts/`. That stylesheet also covers every other Han character in the face, in slices a page downloads only when its text needs them, so data in Chinese is set in the same face.
 - **Real styles only**: 400 and 500 (Maple's SemiBold) only, never synthesis, and no italic.
 - **Labels in capitals**: corner links and section headings are uppercase (`SectionTitle`); tooltips are lowercase, like a shell. Body text keeps its own case.
 - **No content exceptions**: Markdown, code, charts and notices use the same four sizes; change wrapping and layout instead.
@@ -83,7 +83,7 @@ Outlines are drawn with box-drawing characters (`╭ ─ ╮ │ ╰ ╯`), not 
 | `Progress`          | per value      | Waiting with a measure: a bar filling pixel by pixel, its edge a Bayer dither          |
 | `transition-column` | 300ms          | The column easing its width between breakpoints                                        |
 
-- **Page entrance: text decodes**: every app mounts `PageDecode` (`@workspace/ui/components/page-decode`) once in its root layout. A page's text starts scrambled and resolves left to right, 50ms per character (a long line within 600ms), row by row 25ms apart in document order, counting the top corners as row 0: the title is row 1, the subtitle row 2, each block after them one row further. The bottom corners come in at row 15 (375ms). Scrambled glyphs keep each character's cell (Han glyphs for Han characters), so nothing moves. Use `enterRow(n)` and `enterFooter` from `@workspace/ui/lib/layout`; the decoder reads the row from the class.
+- **Page entrance: text decodes**: every app mounts `PageDecode` (`@/components/page-decode`) once in its root layout. A page's text starts scrambled and resolves left to right, 50ms per character (a long line within 600ms), row by row 25ms apart in document order, counting the top corners as row 0: the title is row 1, the subtitle row 2, each block after them one row further. The bottom corners come in at row 15 (375ms). Scrambled glyphs keep each character's cell (Han glyphs for Han characters), so nothing moves. Use `enterRow(n)` and `enterFooter` from `@/lib/layout`; the decoder reads the row from the class.
 - **Page exit: text scrambles**: following a link within the app first scrambles the page being left over 200ms, from the end of each line, then the next page decodes in. Something that draws its own characters (www.zyx.tw's ASCII mark) listens for `LEAVE_EVENT` and scrambles with the page.
 - **Both directions alike**: every animation runs the same way in and out: what zooms in zooms out, what fades in fades out, at the same duration. A select menu that sits over its trigger only fades, opening and closing.
 - **Entrances never move layout**: they change glyphs, opacity, masks, transforms and color only, so CLS stays 0.
@@ -115,8 +115,8 @@ A page is one centered column on a 4px grid, framed by the four corners of the v
 - **4px grid**: every spacing, size and line height is a multiple of 4px. Half steps of 2px are for optical corrections and the inside of controls only.
 - **20px module**: spacing between page parts is a multiple of 20px: demos `gap-15`, groups `gap-20`, hero to content `pb-25`, the top of the page to the title `pt-30`. Inside a part the 4px grid rules (12px from a title to its subtitle).
 - **Spotlight pages**: a page about one thing (a component page on ui.zyx.tw, a result) centers its content on both axes in the column and falls back to scrolling from the top when it is taller than the viewport.
-- **One column**: `column` from `@workspace/ui/lib/layout`, 576, 768 and 1024px wide with 12px gutters (`--gutter`), the same inset the corners have, so on a phone the text starts under the mark. `page` adds the 120px top and 100px bottom space.
-- **Four corners**: the chrome of every app is four fixed corners, 12px (`--gutter`) in from the viewport's corners, 16px between items, all `text-body`, links in capitals (`cornerLink`). A page nav marks the current page in brackets, `[WORKS]`, with `CornerLabel`; the brackets hang outside the label, invisible on the other labels, so the last label's text lines up with the corner's edge and nothing shifts, and the nav takes `gap-7`. Top left is always the zyx mark (to www.zyx.tw; to `/` on www.zyx.tw itself), which mirrors itself on hover. Beside it goes the path to the current page as a breadcrumb, `/ WORKS / AINTERN` (`trail`): every step but the last is a link, and on a phone only the last step shows. www.zyx.tw's home has none; every other site starts its trail with its own name, `/ GOLEM`, linking to its home once a page is below it. Top right holds the page nav and the page's function buttons. Every item there is a text link in the corner link style (`cornerLink`), never an icon button: a signed-in app shows `Sign out` and nothing else it can do without. Light and dark switch with the d key; a site that also shows a switch uses `ThemeToggle`, a LIGHT or DARK text link, never a sun or moon icon. Bottom left is Privacy and Terms and nothing else (`LegalLinks`). Bottom right is the copyright. They come from `@workspace/ui/components/corners`, published as `@zyx1121/corners`; an app leaves a corner empty rather than filling it with something else. An app's own working surface is content, not chrome: Plump's toolbar stays at the bottom center of its canvas.
+- **One column**: `column` from `@/lib/layout`, 576, 768 and 1024px wide with 12px gutters (`--gutter`), the same inset the corners have, so on a phone the text starts under the mark. `page` adds the 120px top and 100px bottom space.
+- **Four corners**: the chrome of every app is four fixed corners, 12px (`--gutter`) in from the viewport's corners, 16px between items, all `text-body`, links in capitals (`cornerLink`). A page nav marks the current page in brackets, `[WORKS]`, with `CornerLabel`; the brackets hang outside the label, invisible on the other labels, so the last label's text lines up with the corner's edge and nothing shifts, and the nav takes `gap-7`. Top left is always the zyx mark (to www.zyx.tw; to `/` on www.zyx.tw itself), which mirrors itself on hover. Beside it goes the path to the current page as a breadcrumb, `/ WORKS / AINTERN` (`trail`): every step but the last is a link, and on a phone only the last step shows. www.zyx.tw's home has none; every other site starts its trail with its own name, `/ GOLEM`, linking to its home once a page is below it. Top right holds the page nav and the page's function buttons. Every item there is a text link in the corner link style (`cornerLink`), never an icon button: a signed-in app shows `Sign out` and nothing else it can do without. Light and dark switch with the d key; a site that also shows a switch uses `ThemeToggle`, a LIGHT or DARK text link, never a sun or moon icon. Bottom left is Privacy and Terms and nothing else (`LegalLinks`). Bottom right is the copyright. They come from `@/components/corners`, published as `@zyx1121/corners`; an app leaves a corner empty rather than filling it with something else. An app's own working surface is content, not chrome: Plump's toolbar stays at the bottom center of its canvas.
 - **TV frame**: opt in with `tv` on `<html>`: a 16px black bezel, a screen with 16px round corners (`--screen-radius`), a dark glow at the screen's edge and faint scanlines; the corners then sit 12px in from the screen. No zyx.tw site wears it, so every site's corners sit 12px from the viewport.
 - **Corner tips**: an item in a corner can carry a tip (`CornerTip`) that says what its label leaves out; it never restates a text label. Tips open at once, toward the page; touch never opens them.
 - **The corners stay put**: where content scrolls under them, a transparent 12px blur fades out over 64px from the top and bottom edges (`fade`). Pages that fill the viewport leave it off.
@@ -161,11 +161,11 @@ The chrome is grayscale, so a badge tells states apart by fill, not by hue. A ca
 
 ## Components
 
-`packages/ui/src/components/ui/`, published as `@zyx1121/<name>`:
+`registry/zyx/components/ui/`, published as `@zyx1121/<name>`:
 
-- **Groups**: each item's first category in `apps/ui/registry.json` is its group on ui.zyx.tw (`apps/ui/lib/docs.ts` orders them); a new item needs no list edit.
-- **Layout** (`registry:component`, in `packages/ui/src/components/`): corners (with corner-tip and zyx-mark), page-decode, section-title, shell
-- **Blocks** (`registry:block`, in `packages/ui/src/components/`): confirm-dialog, empty-state, status-page (a shell session: the failed command, the title as output, the way out, an idle cursor; every 404 is `cd <RequestedPath />`). A block serves one purpose and fixes its copy pattern; a component is a part with no purpose of its own. Blocks have no description slot.
+- **Groups**: each item's first category in `registry.json` is its group on ui.zyx.tw (`lib/docs.ts` orders them); a new item needs no list edit.
+- **Layout** (`registry:component`, in `registry/zyx/components/`): corners (with corner-tip and zyx-mark), page-decode, section-title, shell
+- **Blocks** (`registry:block`, in `registry/zyx/components/`): confirm-dialog, empty-state, status-page (a shell session: the failed command, the title as output, the way out, an idle cursor; every 404 is `cd <RequestedPath />`). A block serves one purpose and fixes its copy pattern; a component is a part with no purpose of its own. Blocks have no description slot.
 
 Contract for every component:
 
@@ -215,7 +215,7 @@ Every zyx.tw site is written for people and for agents. A static export has no s
 
 ## Agent kit
 
-Web apps with an agent in them (AIntern, the FDE demos) share the server half too. The kit lives in `packages/agent/src/`, is published as `registry:lib` items named `agent-*`, and installs into a project's `lib/agent/`. Each file is the app's own afterwards, like a component.
+Web apps with an agent in them (AIntern, the FDE demos) share the server half too. The kit lives in `registry/zyx/agent/`, is published as `registry:lib` items named `agent-*`, and installs into a project's `lib/agent/`. Each file is the app's own afterwards, like a component.
 
 | Item                 | What it gives                                                                                               |
 | -------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -235,14 +235,14 @@ Web apps with an agent in them (AIntern, the FDE demos) share the server half to
 
 ## Adding or changing a component
 
-1. Edit or add `packages/ui/src/components/ui/<name>.tsx`. Import siblings relatively.
-2. For a new one, add its item to `apps/ui/registry.json` (dependencies, `registryDependencies` by URL, keyframes in `css`) its demo to `apps/ui/components/demos.tsx` and its name to a group in `apps/ui/lib/docs.ts`. The build fails while a component has no group, and each one gets a page at `/<name>` and `/<name>.md`.
+1. Edit or add `registry/zyx/components/ui/<name>.tsx`. Import siblings relatively.
+2. For a new one, add its item to `registry.json` (dependencies, `registryDependencies` by URL, keyframes in `css`) its demo to `components/demos.tsx` and its name to a group in `lib/docs.ts`. The build fails while a component has no group, and each one gets a page at `/<name>` and `/<name>.md`.
 3. Run `bun run theme:check`, `bun run tokens:check` and `bun run build` (it runs `shadcn build`).
 4. Merge to `main`: Vercel builds and serves `main` only.
 
 ## What we explicitly don't do
 
-- **No stock copies.** A component exists once, in `packages/ui`. Restyling happens in that file, not in a theme override aimed at someone else's markup.
+- **No stock copies.** A component exists once, in `registry/zyx`. Restyling happens in that file, not in a theme override aimed at someone else's markup.
 - **No marketing blocks (Hero, CTA, Pricing) in the registry.** Blocks exist for interface patterns that repeat across apps (confirming, empty lists, status pages); page content is composed at the call site.
 - **No CSS-in-JS.** Tailwind utilities on tokens; app stylesheets only for content.
 - **No color in chrome**, **no header or footer bars**, **no menu button for a short nav**, **no bold for hierarchy**, **no cards on the page**, **no rounded fills**, **no shadows**, **no frosted glass** (except the dialog, above), **no second typeface.**

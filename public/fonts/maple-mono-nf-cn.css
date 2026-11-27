@@ -1,4 +1,4 @@
-/* Maple Mono NF CN for projects on the ui.zyx.tw base (packages/ui/src/fonts/README.md). */
+/* Maple Mono NF CN for projects on the ui.zyx.tw base (registry/zyx/fonts/README.md). */
 @font-face {
   font-family: "Maple Mono NF CN";
   src: url("./MapleMonoNFCN-Regular.woff2") format("woff2");
@@ -22,7 +22,7 @@
   font-display: swap;
 }
 
-/* Every other Han character and CJK symbol in the face, in slices by unicode-range (packages/ui/src/fonts/README.md): a page downloads only the slices its text needs. */
+/* Every other Han character and CJK symbol in the face, in slices by unicode-range (registry/zyx/fonts/README.md): a page downloads only the slices its text needs. */
 @font-face {
   font-family: "Maple Mono NF CN";
   src: url("./cjk/maple-400-0.woff2") format("woff2");

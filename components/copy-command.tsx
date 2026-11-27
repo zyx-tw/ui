@@ -6,8 +6,8 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@workspace/ui/components/ui/tooltip";
-import { cn } from "@workspace/ui/lib/utils";
+} from "@/registry/zyx/components/ui/tooltip";
+import { cn } from "@/registry/zyx/lib/utils";
 
 // A command people paste into a terminal. One click copies it; the tip says
 // "Copy", then "Copied".

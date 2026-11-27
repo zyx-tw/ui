@@ -55,9 +55,9 @@ bun dev
 
 ## Add a Component
 
-The source lives in `packages/ui/src/components/ui/`; `registry/zyx/ui` is a symlink to it.
+The source lives in `registry/zyx/components/ui/`; 
 
-1. Write `packages/ui/src/components/ui/<name>.tsx` (siblings imported relatively)
+1. Write `registry/zyx/components/ui/<name>.tsx` (siblings imported relatively)
 2. Register it in `registry.json`
 3. Add its demo to `components/showcase.tsx`
 4. `bun run build` regenerates `public/r/<name>.json` and checks it builds

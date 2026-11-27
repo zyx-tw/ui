@@ -7,9 +7,9 @@ import {
   cornerLink,
   CornerTip,
   TopCorners,
-} from "@workspace/ui/components/corners";
-import { ThemeToggle } from "@workspace/ui/components/ui/theme-toggle";
-import { enterRow } from "@workspace/ui/lib/layout";
+} from "@/registry/zyx/components/corners";
+import { ThemeToggle } from "@/registry/zyx/components/ui/theme-toggle";
+import { enterRow } from "@/registry/zyx/lib/layout";
 
 // The mark top left goes to www.zyx.tw, and the trail beside it reads
 // `/ UI` on the home page and `/ UI / INPUT` on a component's page. The

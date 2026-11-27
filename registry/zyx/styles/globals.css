@@ -8,9 +8,9 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
-@source "../../../../apps/*/app/**/*.{ts,tsx}";
-@source "../../../../apps/*/components/**/*.{ts,tsx}";
-@source "../../../../apps/*/lib/**/*.{ts,tsx}";
+@source "../../../app/**/*.{ts,tsx}";
+@source "../../../components/**/*.{ts,tsx}";
+@source "../../../lib/**/*.{ts,tsx}";
 @source "../**/*.{ts,tsx}";
 
 @theme inline {

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
-import { cn } from "@workspace/ui/lib/utils";
+import { cn } from "@/registry/zyx/lib/utils";
 
-import "@workspace/ui/globals.css";
+import "@/registry/zyx/styles/globals.css";
 
-import { NextPageDecode } from "@workspace/ui/components/page-decode-next";
-import { ThemeProvider } from "@workspace/ui/components/theme-provider";
-import { Toaster } from "@workspace/ui/components/ui/sonner";
-import { TooltipProvider } from "@workspace/ui/components/ui/tooltip";
-import { fontVariables } from "@workspace/ui/lib/fonts";
+import { NextPageDecode } from "@/registry/zyx/components/page-decode-next";
+import { ThemeProvider } from "@/registry/zyx/components/theme-provider";
+import { Toaster } from "@/registry/zyx/components/ui/sonner";
+import { TooltipProvider } from "@/registry/zyx/components/ui/tooltip";
+import { fontVariables } from "@/registry/zyx/lib/fonts";
 
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";

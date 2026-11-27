@@ -1,5 +1,5 @@
-import { createOnRequestError } from "@workspace/otel/on-request-error";
-import { registerSensorium } from "@workspace/otel/register";
+import { createOnRequestError } from "@/lib/otel/on-request-error";
+import { registerSensorium } from "@/lib/otel/register";
 
 /**
  * OpenTelemetry bootstrap for this app; see @workspace/otel/register for

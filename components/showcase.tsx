@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import { SectionTitle } from "@workspace/ui/components/section-title";
-import { cn } from "@workspace/ui/lib/utils";
-import { enterRow } from "@workspace/ui/lib/layout";
+import { SectionTitle } from "@/registry/zyx/components/section-title";
+import { cn } from "@/registry/zyx/lib/utils";
+import { enterRow } from "@/registry/zyx/lib/layout";
 
 import { CopyCommand } from "@/components/copy-command";
 import type { DocGroup } from "@/lib/docs";

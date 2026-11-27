@@ -1,17 +1,17 @@
 # Maple Mono NF CN
 
-Maple Mono 7.9 from [subframe7536/maple-font](https://github.com/subframe7536/maple-font): `MapleMono-NF-CN-Regular.ttf` and `MapleMono-NF-CN-SemiBold.ttf` from `MapleMono-NF-CN.zip`. SIL Open Font License 1.1, see [LICENSE.txt](LICENSE.txt). `apps/ui/public/fonts/` serves the same files to projects outside this repo (`maple-mono-nf-cn.css` there, which a project links in its head).
+Maple Mono 7.9 from [subframe7536/maple-font](https://github.com/subframe7536/maple-font): `MapleMono-NF-CN-Regular.ttf` and `MapleMono-NF-CN-SemiBold.ttf` from `MapleMono-NF-CN.zip`. SIL Open Font License 1.1, see [LICENSE.txt](LICENSE.txt). `public/fonts/` serves the same files to projects outside this repo (`maple-mono-nf-cn.css` there, which a project links in its head).
 
-Each weight comes in two files. `MapleMonoNFCN-<weight>.woff2` holds Latin, general punctuation, arrows, technical symbols, box drawing, block elements and geometric shapes, about 60 KB, and every page preloads it. `MapleMonoNFCN-<weight>-CJK.woff2` holds CJK punctuation, full width forms and the Han characters in `cjk.txt`: every Han character in the apps' text (`apps/*/app`, `components`, `lib`, except Plump). Its `unicode-range` keeps a page with no Han text from downloading it. Han characters outside the subset fall back to Noto Sans TC. `apps/ui/public/fonts/` serves only the Latin files; there the slices below cover the Han characters.
+Each weight comes in two files. `MapleMonoNFCN-<weight>.woff2` holds Latin, general punctuation, arrows, technical symbols, box drawing, block elements and geometric shapes, about 60 KB, and every page preloads it. `MapleMonoNFCN-<weight>-CJK.woff2` holds CJK punctuation, full width forms and the Han characters in `cjk.txt`: every Han character in the apps' text (`apps/*/app`, `components`, `lib`, except Plump). Its `unicode-range` keeps a page with no Han text from downloading it. Han characters outside the subset fall back to Noto Sans TC. `public/fonts/` serves only the Latin files; there the slices below cover the Han characters.
 
 Collect `cjk.txt` again when the apps' text gains new Han characters. From the repository root:
 
 ```bash
 grep -rhoP '\p{Han}' apps/{1909,good,link,time,ui,web}/{app,components,lib} 2>/dev/null \
-  | sort -u | tr -d '\n' > packages/ui/src/fonts/cjk.txt
+  | sort -u | tr -d '\n' > registry/zyx/fonts/cjk.txt
 ```
 
-Then run this in an empty directory that holds a copy of `cjk.txt`. Copy the four files into `packages/ui/src/fonts/`, and the two Latin files into `apps/ui/public/fonts/`:
+Then run this in an empty directory that holds a copy of `cjk.txt`. Copy the four files into `registry/zyx/fonts/`, and the two Latin files into `public/fonts/`:
 
 ```bash
 mkdir -p src
@@ -31,7 +31,7 @@ done
 
 ## Every other Han character
 
-Text that comes from data (a file name, a merchant on a bank statement) uses Han characters outside `cjk.txt`. `apps/ui/public/fonts/maple-mono-nf-cn.css` covers them with the same face: after the two subset files it lists 95 slices per weight in `fonts/cjk/`, each with a `unicode-range`, so a page downloads only the slices its text needs. Apps in this repository do not load them: all their Han characters are in `cjk.txt`.
+Text that comes from data (a file name, a merchant on a bank statement) uses Han characters outside `cjk.txt`. `public/fonts/maple-mono-nf-cn.css` covers them with the same face: after the two subset files it lists 95 slices per weight in `fonts/cjk/`, each with a `unicode-range`, so a page downloads only the slices its text needs. Apps in this repository do not load them: all their Han characters are in `cjk.txt`.
 
 To cut the slices again, in the directory that holds `src/` from the step above:
 
@@ -42,4 +42,4 @@ mkdir -p cjk
 uvx --from 'fonttools[woff]==4.60.1' python slice-cjk.py
 ```
 
-Copy `cjk/*.woff2` into `apps/ui/public/fonts/cjk/` and replace the slice faces in `maple-mono-nf-cn.css` with `cjk/faces.css`.
+Copy `cjk/*.woff2` into `public/fonts/cjk/` and replace the slice faces in `maple-mono-nf-cn.css` with `cjk/faces.css`.

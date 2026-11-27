@@ -22,59 +22,59 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@workspace/ui/components/ui/alert-dialog";
+} from "@/registry/zyx/components/ui/alert-dialog";
 import {
   Attachment,
   AttachmentContent,
   AttachmentDescription,
   AttachmentMedia,
   AttachmentTitle,
-} from "@workspace/ui/components/ui/attachment";
-import { Avatar, AvatarFallback } from "@workspace/ui/components/ui/avatar";
-import { ConfirmDialog } from "@workspace/ui/components/confirm-dialog";
-import { EmptyState, TableEmpty } from "@workspace/ui/components/empty-state";
-import { DiagramFigure } from "@workspace/ui/components/figure-diagram";
-import { DialFigure } from "@workspace/ui/components/figure-dial";
-import { LessonFigure } from "@workspace/ui/components/figure-lesson";
-import { QuizFigure } from "@workspace/ui/components/figure-quiz";
-import { TraceFigure } from "@workspace/ui/components/figure-trace";
-import { Hero, HeroTitle } from "@workspace/ui/components/hero";
-import { NoteMap } from "@workspace/ui/components/note-map";
-import { Scrolly } from "@workspace/ui/components/scrolly";
-import { StarMap } from "@workspace/ui/components/star-map";
-import type { System } from "@workspace/ui/lib/star-chart";
-import { LEAVE_EVENT } from "@workspace/ui/components/page-decode";
-import { Rows } from "@workspace/ui/components/rows";
-import { SectionTitle } from "@workspace/ui/components/section-title";
-import { StarField } from "@workspace/ui/components/star-field";
+} from "@/registry/zyx/components/ui/attachment";
+import { Avatar, AvatarFallback } from "@/registry/zyx/components/ui/avatar";
+import { ConfirmDialog } from "@/registry/zyx/components/confirm-dialog";
+import { EmptyState, TableEmpty } from "@/registry/zyx/components/empty-state";
+import { DiagramFigure } from "@/registry/zyx/components/figure-diagram";
+import { DialFigure } from "@/registry/zyx/components/figure-dial";
+import { LessonFigure } from "@/registry/zyx/components/figure-lesson";
+import { QuizFigure } from "@/registry/zyx/components/figure-quiz";
+import { TraceFigure } from "@/registry/zyx/components/figure-trace";
+import { Hero, HeroTitle } from "@/registry/zyx/components/hero";
+import { NoteMap } from "@/registry/zyx/components/note-map";
+import { Scrolly } from "@/registry/zyx/components/scrolly";
+import { StarMap } from "@/registry/zyx/components/star-map";
+import type { System } from "@/registry/zyx/lib/star-chart";
+import { LEAVE_EVENT } from "@/registry/zyx/components/page-decode";
+import { Rows } from "@/registry/zyx/components/rows";
+import { SectionTitle } from "@/registry/zyx/components/section-title";
+import { StarField } from "@/registry/zyx/components/star-field";
 import { AsciiDemo, GlyphChartDemo } from "./glyph-demos";
-import { TvStatic } from "@workspace/ui/components/tv";
+import { TvStatic } from "@/registry/zyx/components/tv";
 import {
   Command as ShellCommand,
   Cursor,
-} from "@workspace/ui/components/shell";
-import { StatusPage } from "@workspace/ui/components/status-page";
-import { Badge } from "@workspace/ui/components/ui/badge";
-import { Bubble } from "@workspace/ui/components/ui/bubble";
-import { Button } from "@workspace/ui/components/ui/button";
-import { Calendar } from "@workspace/ui/components/ui/calendar";
+} from "@/registry/zyx/components/shell";
+import { StatusPage } from "@/registry/zyx/components/status-page";
+import { Badge } from "@/registry/zyx/components/ui/badge";
+import { Bubble } from "@/registry/zyx/components/ui/bubble";
+import { Button } from "@/registry/zyx/components/ui/button";
+import { Calendar } from "@/registry/zyx/components/ui/calendar";
 import {
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from "@workspace/ui/components/ui/chart";
-import { Checkbox } from "@workspace/ui/components/ui/checkbox";
+} from "@/registry/zyx/components/ui/chart";
+import { Checkbox } from "@/registry/zyx/components/ui/checkbox";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@workspace/ui/components/ui/collapsible";
+} from "@/registry/zyx/components/ui/collapsible";
 import {
   ComboboxContent,
   ComboboxTrigger,
-} from "@workspace/ui/components/ui/combobox";
+} from "@/registry/zyx/components/ui/combobox";
 import {
   Command,
   CommandEmpty,
@@ -82,7 +82,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@workspace/ui/components/ui/command";
+} from "@/registry/zyx/components/ui/command";
 import {
   Dialog,
   DialogClose,
@@ -92,7 +92,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@workspace/ui/components/ui/dialog";
+} from "@/registry/zyx/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -101,42 +101,42 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@workspace/ui/components/ui/dropdown-menu";
-import { Frame } from "@workspace/ui/components/ui/frame";
-import { Input } from "@workspace/ui/components/ui/input";
+} from "@/registry/zyx/components/ui/dropdown-menu";
+import { Frame } from "@/registry/zyx/components/ui/frame";
+import { Input } from "@/registry/zyx/components/ui/input";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@workspace/ui/components/ui/input-group";
-import { Label } from "@workspace/ui/components/ui/label";
-import { MaskReveal } from "@workspace/ui/components/ui/mask-reveal";
+} from "@/registry/zyx/components/ui/input-group";
+import { Label } from "@/registry/zyx/components/ui/label";
+import { MaskReveal } from "@/registry/zyx/components/ui/mask-reveal";
 import {
   Message,
   MessageContent,
   MessageFooter,
   MessageGroup,
-} from "@workspace/ui/components/ui/message";
+} from "@/registry/zyx/components/ui/message";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@workspace/ui/components/ui/popover";
+} from "@/registry/zyx/components/ui/popover";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@workspace/ui/components/ui/resizable";
-import { ScrambleText } from "@workspace/ui/components/ui/scramble-text";
+} from "@/registry/zyx/components/ui/resizable";
+import { ScrambleText } from "@/registry/zyx/components/ui/scramble-text";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@workspace/ui/components/ui/select";
-import { Separator } from "@workspace/ui/components/ui/separator";
+} from "@/registry/zyx/components/ui/select";
+import { Separator } from "@/registry/zyx/components/ui/separator";
 import {
   Sheet,
   SheetContent,
@@ -144,10 +144,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@workspace/ui/components/ui/sheet";
-import { Skeleton } from "@workspace/ui/components/ui/skeleton";
-import { Slider } from "@workspace/ui/components/ui/slider";
-import { Switch } from "@workspace/ui/components/ui/switch";
+} from "@/registry/zyx/components/ui/sheet";
+import { Skeleton } from "@/registry/zyx/components/ui/skeleton";
+import { Slider } from "@/registry/zyx/components/ui/slider";
+import { Switch } from "@/registry/zyx/components/ui/switch";
 import {
   Table,
   TableBody,
@@ -155,25 +155,25 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@workspace/ui/components/ui/table";
+} from "@/registry/zyx/components/ui/table";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@workspace/ui/components/ui/tabs";
-import { Textarea } from "@workspace/ui/components/ui/textarea";
-import { ThemeToggle } from "@workspace/ui/components/ui/theme-toggle";
-import { Toggle } from "@workspace/ui/components/ui/toggle";
+} from "@/registry/zyx/components/ui/tabs";
+import { Textarea } from "@/registry/zyx/components/ui/textarea";
+import { ThemeToggle } from "@/registry/zyx/components/ui/theme-toggle";
+import { Toggle } from "@/registry/zyx/components/ui/toggle";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@workspace/ui/components/ui/tooltip";
-import { Toolbar } from "@workspace/ui/components/ui/toolbar";
-import { Progress } from "@workspace/ui/components/ui/progress";
-import { Spinner } from "@workspace/ui/components/ui/spinner";
-import { rowDelay } from "@workspace/ui/lib/layout";
+} from "@/registry/zyx/components/ui/tooltip";
+import { Toolbar } from "@/registry/zyx/components/ui/toolbar";
+import { Progress } from "@/registry/zyx/components/ui/progress";
+import { Spinner } from "@/registry/zyx/components/ui/spinner";
+import { rowDelay } from "@/registry/zyx/lib/layout";
 
 const PROJECTS = ["Plump", "Time", "Link", "Carrel", "Peck"];
 

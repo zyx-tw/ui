@@ -1101,7 +1101,7 @@
       ],
       "files": [
         {
-          "path": "registry/zyx/ui/alert-dialog.tsx",
+          "path": "registry/zyx/components/ui/alert-dialog.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1122,7 +1122,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/attachment.tsx",
+          "path": "registry/zyx/components/ui/attachment.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1144,7 +1144,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/avatar.tsx",
+          "path": "registry/zyx/components/ui/avatar.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1166,7 +1166,7 @@
       "dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/badge.tsx",
+          "path": "registry/zyx/components/ui/badge.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1188,7 +1188,7 @@
       "dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/bubble.tsx",
+          "path": "registry/zyx/components/ui/bubble.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1210,7 +1210,7 @@
       "dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/button.tsx",
+          "path": "registry/zyx/components/ui/button.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1239,7 +1239,7 @@
       ],
       "files": [
         {
-          "path": "registry/zyx/ui/calendar.tsx",
+          "path": "registry/zyx/components/ui/calendar.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1260,7 +1260,7 @@
       "dependencies": ["cn", "recharts"],
       "files": [
         {
-          "path": "registry/zyx/ui/chart.tsx",
+          "path": "registry/zyx/components/ui/chart.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1285,7 +1285,7 @@
       "dependencies": ["@base-ui/react", "cn", "lucide-react"],
       "files": [
         {
-          "path": "registry/zyx/ui/checkbox.tsx",
+          "path": "registry/zyx/components/ui/checkbox.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1307,7 +1307,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/collapsible.tsx",
+          "path": "registry/zyx/components/ui/collapsible.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1335,7 +1335,7 @@
       ],
       "files": [
         {
-          "path": "registry/zyx/ui/combobox.tsx",
+          "path": "registry/zyx/components/ui/combobox.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1356,7 +1356,7 @@
       "dependencies": ["cmdk", "cn", "lucide-react"],
       "files": [
         {
-          "path": "registry/zyx/ui/command.tsx",
+          "path": "registry/zyx/components/ui/command.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1392,7 +1392,7 @@
       ],
       "files": [
         {
-          "path": "registry/zyx/ui/dialog.tsx",
+          "path": "registry/zyx/components/ui/dialog.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1413,7 +1413,7 @@
       "dependencies": ["@base-ui/react", "cn", "lucide-react"],
       "files": [
         {
-          "path": "registry/zyx/ui/dropdown-menu.tsx",
+          "path": "registry/zyx/components/ui/dropdown-menu.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1438,7 +1438,7 @@
       "registryDependencies": ["https://ui.zyx.tw/r/utils.json"],
       "files": [
         {
-          "path": "registry/zyx/ui/frame.tsx",
+          "path": "registry/zyx/components/ui/frame.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1540,7 +1540,7 @@
       },
       "files": [
         {
-          "path": "registry/zyx/ui/field-trigger.ts",
+          "path": "registry/zyx/components/ui/field-trigger.ts",
           "type": "registry:ui"
         }
       ]
@@ -1568,7 +1568,7 @@
       ],
       "files": [
         {
-          "path": "registry/zyx/ui/input-group.tsx",
+          "path": "registry/zyx/components/ui/input-group.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1589,7 +1589,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/input.tsx",
+          "path": "registry/zyx/components/ui/input.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1615,7 +1615,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/label.tsx",
+          "path": "registry/zyx/components/ui/label.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1637,7 +1637,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/mask-reveal.tsx",
+          "path": "registry/zyx/components/ui/mask-reveal.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1680,7 +1680,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/message.tsx",
+          "path": "registry/zyx/components/ui/message.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1702,7 +1702,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/popover.tsx",
+          "path": "registry/zyx/components/ui/popover.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1732,7 +1732,7 @@
       },
       "files": [
         {
-          "path": "registry/zyx/ui/progress.tsx",
+          "path": "registry/zyx/components/ui/progress.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1754,7 +1754,7 @@
       "dependencies": ["cn", "react-resizable-panels"],
       "files": [
         {
-          "path": "registry/zyx/ui/resizable.tsx",
+          "path": "registry/zyx/components/ui/resizable.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1776,7 +1776,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/scramble-text.tsx",
+          "path": "registry/zyx/components/ui/scramble-text.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1815,7 +1815,7 @@
       ],
       "files": [
         {
-          "path": "registry/zyx/ui/select.tsx",
+          "path": "registry/zyx/components/ui/select.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1835,7 +1835,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/separator.tsx",
+          "path": "registry/zyx/components/ui/separator.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1862,7 +1862,7 @@
       ],
       "files": [
         {
-          "path": "registry/zyx/ui/sheet.tsx",
+          "path": "registry/zyx/components/ui/sheet.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1913,7 +1913,7 @@
       },
       "files": [
         {
-          "path": "registry/zyx/ui/skeleton.tsx",
+          "path": "registry/zyx/components/ui/skeleton.tsx",
           "type": "registry:ui"
         }
       ],
@@ -1989,7 +1989,7 @@
       },
       "files": [
         {
-          "path": "registry/zyx/ui/spinner.tsx",
+          "path": "registry/zyx/components/ui/spinner.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2011,7 +2011,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/slider.tsx",
+          "path": "registry/zyx/components/ui/slider.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2046,7 +2046,7 @@
       },
       "files": [
         {
-          "path": "registry/zyx/ui/sonner.tsx",
+          "path": "registry/zyx/components/ui/sonner.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2068,7 +2068,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/switch.tsx",
+          "path": "registry/zyx/components/ui/switch.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2090,7 +2090,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/table.tsx",
+          "path": "registry/zyx/components/ui/table.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2112,7 +2112,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/tabs.tsx",
+          "path": "registry/zyx/components/ui/tabs.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2134,7 +2134,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/textarea.tsx",
+          "path": "registry/zyx/components/ui/textarea.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2164,7 +2164,7 @@
       ],
       "files": [
         {
-          "path": "registry/zyx/ui/theme-toggle.tsx",
+          "path": "registry/zyx/components/ui/theme-toggle.tsx",
           "type": "registry:ui"
         }
       ]
@@ -2185,7 +2185,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/toggle.tsx",
+          "path": "registry/zyx/components/ui/toggle.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2207,7 +2207,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/toolbar.tsx",
+          "path": "registry/zyx/components/ui/toolbar.tsx",
           "type": "registry:ui"
         }
       ],
@@ -2232,7 +2232,7 @@
       "dependencies": ["@base-ui/react", "cn"],
       "files": [
         {
-          "path": "registry/zyx/ui/tooltip.tsx",
+          "path": "registry/zyx/components/ui/tooltip.tsx",
           "type": "registry:ui"
         }
       ],
