@@ -56,7 +56,10 @@ function Calendar({
           defaults.weekday
         ),
         week: cn("flex", defaults.week),
-        day: cn("size-10 rounded-control p-0 text-center select-none", defaults.day),
+        day: cn(
+          "size-10 rounded-control p-0 text-center select-none",
+          defaults.day
+        ),
         today: cn("font-semibold", defaults.today),
         outside: cn("text-muted-foreground", defaults.outside),
         disabled: cn("opacity-50", defaults.disabled),

@@ -20,11 +20,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={notoSansTc.variable}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={notoSansTc.variable} suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"

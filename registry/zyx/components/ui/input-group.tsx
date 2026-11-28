@@ -20,7 +20,7 @@ function InputGroup({
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/field relative flex h-10 w-full rounded-control min-w-0 items-center has-disabled:opacity-50",
+        "group/field relative flex h-10 w-full min-w-0 items-center rounded-control has-disabled:opacity-50",
         className
       )}
       {...props}

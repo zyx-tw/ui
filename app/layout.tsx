@@ -62,7 +62,7 @@ export default function RootLayout({
       {/* The page fills the viewport so the footer sits low on short pages. */}
       <body className="flex min-h-dvh flex-col">
         <JsonLd />
-          <TooltipProvider>
+        <TooltipProvider>
           <NextPageDecode />
           <SiteHeader titles={DOC_TITLES} />
           {children}
