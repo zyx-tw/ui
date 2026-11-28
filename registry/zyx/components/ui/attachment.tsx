@@ -29,7 +29,7 @@ function AttachmentMedia({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="attachment-media"
       className={cn(
-        "flex size-10 shrink-0 items-center justify-center overflow-hidden bg-muted group-data-[state=error]/attachment:text-destructive [&_svg]:size-4 [&>img]:size-full [&>img]:object-cover",
+        "flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-control bg-muted group-data-[state=error]/attachment:text-destructive [&_svg]:size-4 [&>img]:size-full [&>img]:object-cover",
         className
       )}
       {...props}

@@ -90,11 +90,13 @@ const classRules = [
     name: "arbitrary value",
     regex: /(?<![\w-])-?[a-z][\w-]*-\[[^\]\s]+\](?![:/\]])/g,
   },
-  // Everything is square, as in a terminal: rounded-none only, to clear a
-  // radius a library sets.
+  // Corners come from the radius tokens: inner (small marks such as a
+  // checkbox), control (fields, buttons, rows), window (layer-2 surfaces) and
+  // full (pills, dots), or none to clear one.
   {
-    name: "radius (everything is square)",
-    regex: /\brounded(?!-none\b)(?:-[\w-]+)?(?![\w-])/g,
+    name: "radius (use rounded-control, rounded-window or rounded-full)",
+    regex:
+      /\brounded(?:-(?:t|b|l|r|s|e|tl|tr|bl|br|ss|se|es|ee))?(?!-(?:none|inner|control|window|full)\b)(?:-[\w-]+)?(?![\w-])/g,
   },
   {
     name: "palette color",
@@ -119,8 +121,8 @@ const sourceRules = [
   },
   { name: "inline style", regex: /\bstyle=\{/g },
   {
-    name: "radius (everything is square)",
-    regex: /var\(--radius[\w-]*\)|\bborder-radius\s*:(?!\s*0\b)/g,
+    name: "radius literal (use a radius token)",
+    regex: /\bborder-radius\s*:(?!\s*(?:0\b|inherit\b|var\(--radius))/g,
   },
   // CSS may only name the scale: font-size: var(--text-body).
   {

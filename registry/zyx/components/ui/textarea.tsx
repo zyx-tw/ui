@@ -9,7 +9,10 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   return (
     <span
       data-slot="textarea-field"
-      className={cn("group/field relative flex w-full min-w-0", className)}
+      className={cn(
+        "group/field relative flex w-full min-w-0 rounded-control",
+        className
+      )}
     >
       <textarea
         data-slot="textarea"

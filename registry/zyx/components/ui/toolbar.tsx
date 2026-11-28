@@ -14,7 +14,7 @@ function Toolbar({
     <div
       data-slot="toolbar"
       className={cn(
-        "relative flex items-center gap-1 bg-background p-1 text-body",
+        "relative flex items-center gap-1 rounded-window bg-background p-1 text-body shadow-window",
         className
       )}
       {...props}

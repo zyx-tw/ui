@@ -1,7 +1,6 @@
 "use client"
 
 import { BottomCorners, LegalLinks, TopCorners } from "./corners"
-import { ThemeToggle } from "./ui/theme-toggle"
 
 import { column, enterRow, page } from "../lib/layout"
 import { cn } from "../lib/utils"
@@ -9,14 +8,13 @@ import { cn } from "../lib/utils"
 /**
  * The page of a small task (a personal tool, a demo): the four corners, the
  * page motion and one centered column that holds the title and the task.
- * The root layout mounts ThemeProvider (dark first, the D key) and the page
- * motion once, as the task item's app/layout.tsx does. `actions` are short text links at the
- * top right, a link to the other theme by default; `wide` gives an editor or a comparison more room.
+ * The root layout mounts the page motion once, as the task item's app/layout.tsx does. `actions` are short text links at the
+ * top right, `wide` gives an editor or a comparison more room.
  */
 export function TaskShell({
   title,
   description,
-  actions = <ThemeToggle />,
+  actions,
   wide = false,
   children,
 }: {

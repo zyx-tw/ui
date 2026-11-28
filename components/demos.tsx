@@ -163,7 +163,6 @@ import {
   TabsTrigger,
 } from "@/registry/zyx/components/ui/tabs";
 import { Textarea } from "@/registry/zyx/components/ui/textarea";
-import { ThemeToggle } from "@/registry/zyx/components/ui/theme-toggle";
 import { Toggle } from "@/registry/zyx/components/ui/toggle";
 import {
   Tooltip,
@@ -746,7 +745,6 @@ const DEMOS: Record<string, React.ReactNode> = {
   ),
   "scramble-text": <ScrambleDemo />,
   "mask-reveal": <MaskRevealDemo />,
-  "theme-toggle": <ThemeToggle />,
   "confirm-dialog": (
     <div className="flex items-center justify-center gap-3">
       <ConfirmDialog

@@ -56,7 +56,10 @@ export function Showcase({
       >
         <CopyCommand
           command={initCommand}
-          className={cn("block w-full bg-muted p-4", enterRow(FIRST_ROW + 1))}
+          className={cn(
+            "block w-full rounded-control bg-muted p-4",
+            enterRow(FIRST_ROW + 1)
+          )}
         />
       </Group>
       <div id="components" className="flex scroll-mt-5 flex-col gap-20">

@@ -8,7 +8,6 @@ import {
   CornerTip,
   TopCorners,
 } from "@/registry/zyx/components/corners";
-import { ThemeToggle } from "@/registry/zyx/components/ui/theme-toggle";
 import { enterRow } from "@/registry/zyx/lib/layout";
 
 // The mark top left goes to www.zyx.tw, and the trail beside it reads
@@ -35,7 +34,6 @@ export function SiteHeader({
               Components
             </Link>
           </CornerTip>
-          <ThemeToggle />
         </nav>
       }
     />
