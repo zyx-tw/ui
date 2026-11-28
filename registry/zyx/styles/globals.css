@@ -7,7 +7,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* One fixed theme: dark: never matches, not even under a dark OS setting. */
 @custom-variant dark (&:is(.dark *));
+
 @source "../../../app/**/*.{ts,tsx}";
 @source "../../../components/**/*.{ts,tsx}";
 @source "../../../lib/**/*.{ts,tsx}";
@@ -23,6 +25,12 @@
   --text-body--line-height: 1.5rem;
   --text-caption: 0.875rem;
   --text-caption--line-height: 1.25rem;
+  --radius-inner: 0.25rem;
+  --radius-control: 0.5rem;
+  --radius-window: 0.875rem;
+  --shadow-window:
+    0 12px 32px -8px oklch(0.24 0.012 60 / 18%),
+    0 4px 8px -4px oklch(0.24 0.012 60 / 10%);
   --font-sans:
     var(--font-maple-mono, Maple Mono NF CN),
     var(--font-maple-mono-cjk, Maple Mono NF CN), var(--font-noto-sans-tc),
@@ -56,39 +64,25 @@
 }
 
 :root {
-  --background: oklch(0.97 0.005 85);
-  --foreground: oklch(0.25 0 0);
+  --background: oklch(0.975 0.008 95);
+  --foreground: oklch(0.24 0.012 60);
   /* The one accent: marked words, the current step, a name pointed at. An
-     orange leaning to amber, the same in both themes. */
+     orange leaning to amber. */
   --mark: oklch(0.78 0.16 62);
   /* Data hues: only on marks that encode a value (a chart's line, a meter's
-     fill, a status dot), low to high, the same in both themes. The chrome
-     around them stays grayscale. */
+     fill, a status dot), low to high. The chrome around them stays neutral. */
   --data-low: oklch(0.72 0.15 150);
   --data-mid: oklch(0.78 0.15 80);
   --data-high: oklch(0.68 0.19 25);
-  --primary: oklch(0.25 0 0);
-  --primary-foreground: oklch(0.97 0.005 85);
-  --muted: oklch(0.93 0.005 85);
-  --muted-foreground: oklch(0.52 0 0);
+  --primary: oklch(0.24 0.012 60);
+  --primary-foreground: oklch(0.975 0.008 95);
+  --muted: oklch(0.945 0.009 90);
+  --muted-foreground: oklch(0.5 0.01 70);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.89 0.005 85);
-  --input: oklch(0.89 0.005 85);
-  --ring: oklch(0.25 0 0);
-  --radius: 0;
-}
-
-.dark {
-  --background: oklch(0.17 0 0);
-  --foreground: oklch(0.88 0 0);
-  --primary: oklch(0.88 0 0);
-  --primary-foreground: oklch(0.17 0 0);
-  --muted: oklch(0.26 0 0);
-  --muted-foreground: oklch(0.62 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.88 0 0);
+  --border: oklch(0.24 0.012 60 / 12%);
+  --input: oklch(0.24 0.012 60 / 18%);
+  --ring: oklch(0.24 0.012 60);
+  --radius: 0.5rem;
 }
 
 /* Motion: state changes (hover, toggle, tab) take 150ms, overlays 200ms. */
@@ -150,11 +144,11 @@
   body {
     @apply bg-background text-body text-foreground;
   }
-  .dark {
-    color-scheme: dark;
+  :root {
+    color-scheme: light;
   }
   ::selection {
-    @apply bg-foreground text-background;
+    @apply bg-foreground/15;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -555,103 +549,54 @@ html[data-boot] [data-slot="tv-boot"] {
 }
 
 /*
- * Glyph frames (DESIGN.md, Frames; components/ui/frame.tsx): box-drawing
- * characters draw the outline, as a terminal draws a window, so each line runs
- * through the middle of a character cell and the corners are the font's own
- * arcs. The edges overhang their parent by half a cell, which puts each line
- * where a 1px border would be. Rows are 20px and Maple's vertical bar is
- * 1.52em tall, so the bars meet with no gap. Fills are long runs the cell
- * clips; the vertical run wraps one bar per line.
+ * Frames (DESIGN.md, Frames; components/ui/frame.tsx): a 1px line in the
+ * frame's text color, following its parent's corners (border-radius:
+ * inherit), so a field or a window sets the radius once on itself. A label
+ * sits on the top edge and a detail on the bottom edge at the right, each on
+ * the page color so the line stops around it.
  */
 [data-slot="frame-edges"] {
   position: absolute;
-  inset: calc(var(--text-caption--line-height) / -2) -0.5ch;
+  inset: 0;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1ch minmax(0, 1fr) 1ch;
-  grid-template-rows: var(--text-caption--line-height) minmax(0, 1fr) var(
-      --text-caption--line-height
-    );
-  font-family: var(--font-mono);
-  font-size: var(--text-body);
-  font-weight: 400;
-  line-height: var(--text-caption--line-height);
-  white-space: pre;
-  text-align: start;
+  border: 1px solid currentColor;
+  border-radius: inherit;
   pointer-events: none;
   user-select: none;
 }
-[data-slot="frame-edges"] > * {
-  display: flex;
-  min-width: 0;
+[data-slot="frame-edges"] [data-edge] {
+  display: none;
 }
 [data-slot="frame-edges"] [data-frame-text] {
-  flex: none;
-  padding-inline: 1ch;
-  color: var(--foreground);
+  position: absolute;
+  padding-inline: 0.5ch;
+  background: var(--background);
+  color: var(--muted-foreground);
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
+  white-space: pre;
 }
-/*
- * A fill reaches 1px into its neighbors: clipping two glyphs at the same
- * fractional pixel would leave a faint seam where they meet.
- */
-[data-edge="fill"] {
-  flex: 1;
-  min-width: 0;
-  margin-inline: -1px;
-  overflow: hidden;
+[data-slot="frame-edges"] > :nth-child(2) [data-frame-text] {
+  top: calc(var(--text-caption--line-height) / -2);
+  left: 1.5ch;
 }
-[data-edge="top-left"]::before {
-  content: "╭" / "";
-}
-[data-edge="top-right"]::before {
-  content: "╮" / "";
-}
-[data-edge="bottom-left"]::before {
-  content: "╰" / "";
-}
-[data-edge="bottom-right"]::before {
-  content: "╯" / "";
-}
-[data-edge="lead"]::before {
-  content: "─" / "";
-}
-[data-edge="fill"]::before {
-  content: "────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────" /
-    "";
-}
-[data-edge="side"] {
-  display: block;
-  margin-block: -1px;
-  overflow: hidden;
-  word-break: break-all;
-  white-space: normal;
-}
-[data-edge="side"]::before {
-  content: "││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││" /
-    "";
+[data-slot="frame-edges"] > :nth-child(8) [data-frame-text] {
+  bottom: calc(var(--text-caption--line-height) / -2);
+  right: 1.5ch;
 }
 /* One vertical edge alone, for a sheet against a viewport edge. */
 [data-slot="frame-side"] {
   position: absolute;
   inset-block: 0;
-  width: 1ch;
-  overflow: hidden;
-  font-family: var(--font-mono);
-  font-size: var(--text-body);
-  line-height: var(--text-caption--line-height);
-  word-break: break-all;
+  width: 1px;
+  background: currentColor;
   pointer-events: none;
-  user-select: none;
 }
 [data-slot="frame-side"][data-side="left"] {
-  left: -0.5ch;
+  left: 0;
 }
 [data-slot="frame-side"][data-side="right"] {
-  right: -0.5ch;
-}
-[data-slot="frame-side"]::before {
-  content: "││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││" /
-    "";
+  right: 0;
 }
 
 /*

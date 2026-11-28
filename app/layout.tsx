@@ -5,7 +5,6 @@ import { cn } from "@/registry/zyx/lib/utils";
 import "@/registry/zyx/styles/globals.css";
 
 import { NextPageDecode } from "@/registry/zyx/components/page-decode-next";
-import { ThemeProvider } from "@/registry/zyx/components/theme-provider";
 import { Toaster } from "@/registry/zyx/components/ui/sonner";
 import { TooltipProvider } from "@/registry/zyx/components/ui/tooltip";
 import { fontVariables } from "@/registry/zyx/lib/fonts";
@@ -51,12 +50,10 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      // Dark is server-rendered, so the first paint and pages without
-      // JavaScript are dark. A stable gutter keeps the centered column still
+      // A stable gutter keeps the centered column still
       // when a page gains or loses its scrollbar; one edge only, so the left
       // corners stay 20px from the window's edge.
       className={cn(
-        "dark",
         "[scrollbar-gutter:stable] antialiased",
         fontVariables,
         "font-sans"
@@ -65,15 +62,13 @@ export default function RootLayout({
       {/* The page fills the viewport so the footer sits low on short pages. */}
       <body className="flex min-h-dvh flex-col">
         <JsonLd />
-        <ThemeProvider>
           <TooltipProvider>
-            <NextPageDecode />
-            <SiteHeader titles={DOC_TITLES} />
-            {children}
-            <SiteFooter />
-          </TooltipProvider>
-          <Toaster />
-        </ThemeProvider>
+          <NextPageDecode />
+          <SiteHeader titles={DOC_TITLES} />
+          {children}
+          <SiteFooter />
+        </TooltipProvider>
+        <Toaster />
       </body>
     </html>
   );

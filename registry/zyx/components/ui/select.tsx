@@ -72,13 +72,13 @@ function SelectContent({
         align={align}
         alignOffset={alignOffset}
         alignItemWithTrigger={alignItemWithTrigger}
-        className="group/window isolate z-50"
+        className="group/window isolate z-50 rounded-window"
       >
         <SelectPrimitive.Popup
           data-slot="select-content"
           data-align-trigger={alignItemWithTrigger}
           className={cn(
-            "relative isolate z-50 max-h-(--available-height) w-menu min-w-40 origin-(--transform-origin) overflow-x-hidden overflow-y-auto bg-background text-foreground duration-overlay data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+            "relative isolate z-50 max-h-(--available-height) w-menu rounded-window shadow-window min-w-40 origin-(--transform-origin) overflow-x-hidden overflow-y-auto bg-background text-foreground duration-overlay data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
             className
           )}
           {...props}
@@ -121,7 +121,7 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "relative flex w-full cursor-default items-center gap-2 py-2 pr-9 pl-3 text-body outline-hidden select-none focus:bg-muted data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+        "relative flex w-full cursor-default items-center gap-2 rounded-control py-2 pr-9 pl-3 text-body outline-hidden select-none focus:bg-muted data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         className
       )}
       {...props}

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Measure a rendered page against the zyx contract (ui.zyx.tw DESIGN.md):
-// type scale, four corners, no sideways scroll, dark first and copy written for
+// type scale, four corners, no sideways scroll and copy written for
 // the person using the page.
 import { parseArgs } from "node:util";
 
@@ -183,18 +183,9 @@ async function audit() {
       await page.goto(positionals[0], { waitUntil: "networkidle" });
       await page.evaluate(() => document.fonts.ready);
       const size = `${viewport.width}x${viewport.height}`;
-      if (
-        !(await page.evaluate(() =>
-          document.documentElement.classList.contains("dark")
-        ))
-      )
-        fail("dark-first", size, ['<html> does not start with class="dark"']);
-      for (const theme of ["dark", "light"]) {
-        await page.evaluate(
-          (dark) => document.documentElement.classList.toggle("dark", dark),
-          theme === "dark"
-        );
-        const where = `${size} ${theme}`;
+      // One fixed theme.
+      {
+        const where = size;
         const result = await page.evaluate(measure, {
           sizes: SIZES,
           weights: WEIGHTS,
@@ -243,7 +234,7 @@ async function audit() {
   if (failures.length) process.exitCode = 1;
   else
     console.log(
-      `PASS ${VIEWPORTS.length} viewports x dark/light: type scale, corners, no sideways scroll, dark first, copy`
+      `PASS ${VIEWPORTS.length} viewports: type scale, corners, no sideways scroll, copy`
     );
 }
 

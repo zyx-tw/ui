@@ -195,7 +195,7 @@ export function llmsText() {
     "## When to use",
     "",
     "- You are building or restyling a zyx.tw site, or a user asks for the ui.zyx.tw look.",
-    "- A shadcn/ui project wants the zyx.tw base: a terminal look in one monospace face, soft grayscale with dark first, four type sizes, square corners, muted text at 4.5:1.",
+    "- A shadcn/ui project wants the zyx.tw base: a terminal look in one monospace face, one fixed soft white theme, four type sizes, rounded controls and windows, muted text at 4.5:1.",
     "- A project on the base needs one of the components listed under Registry.",
     "",
     "## How an agent should use it",

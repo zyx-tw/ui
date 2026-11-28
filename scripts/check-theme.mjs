@@ -66,7 +66,11 @@ compare(
   )
 );
 compare("light", readBlock(":root"), base.cssVars.light);
-compare("dark", readBlock(".dark"), base.cssVars.dark);
+// One fixed theme: there is no .dark block to compare.
+if (base.cssVars.dark) {
+  console.error("registry.json base ships a dark theme; there is one theme");
+  failed = true;
+}
 
 // Every color the base defines is mapped for Tailwind, and nothing else is.
 const colors = Object.keys(theme).filter((name) => name.startsWith("color-"));

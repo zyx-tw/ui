@@ -3,7 +3,6 @@ import { Noto_Sans_TC } from "next/font/google";
 
 import "./globals.css";
 import { NextPageDecode } from "@/components/page-decode-next";
-import { ThemeProvider } from "@/components/theme-provider";
 
 // Han characters outside Maple Mono's subset, in slices a page loads on use.
 const notoSansTc = Noto_Sans_TC({
@@ -23,7 +22,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${notoSansTc.variable}`}
+      className={notoSansTc.variable}
       suppressHydrationWarning
     >
       <head>
@@ -33,10 +32,8 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeProvider>
-          <NextPageDecode />
-          {children}
-        </ThemeProvider>
+        <NextPageDecode />
+        {children}
       </body>
     </html>
   );

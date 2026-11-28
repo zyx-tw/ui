@@ -113,7 +113,7 @@ function ChartTooltipContent({
   if (!active || !payload?.length) return null
 
   return (
-    <div className="relative flex min-w-32 flex-col gap-1 bg-background px-3 py-2 text-body">
+    <div className="relative flex min-w-32 flex-col gap-1 rounded-window bg-background shadow-window px-3 py-2 text-body">
       {label !== undefined && <div className="font-medium">{label}</div>}
       {payload.map((entry) => {
         const key = String(entry.dataKey ?? entry.name)

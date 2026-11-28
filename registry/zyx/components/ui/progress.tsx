@@ -69,7 +69,7 @@ function Progress({
       className={cn("h-2 w-full", className)}
       {...props}
     >
-      <canvas ref={ref} className="block size-full bg-muted text-foreground" />
+      <canvas ref={ref} className="block size-full rounded-full bg-muted text-foreground" />
     </div>
   )
 }

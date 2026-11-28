@@ -30,7 +30,10 @@ function Input({
   return (
     <span
       data-slot="input-field"
-      className={cn("group/field relative flex w-full min-w-0", className)}
+      className={cn(
+        "group/field relative flex w-full min-w-0 rounded-control",
+        className
+      )}
     >
       <InputPrimitive
         type={type}

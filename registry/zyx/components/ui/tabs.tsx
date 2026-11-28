@@ -31,7 +31,7 @@ function TabsList({ className, children, ...props }: TabsPrimitive.List.Props) {
       {children}
       <TabsPrimitive.Indicator
         data-slot="tabs-indicator"
-        className="absolute top-(--active-tab-top) left-(--active-tab-left) h-(--active-tab-height) w-(--active-tab-width) bg-foreground transition-all duration-state motion-reduce:transition-none"
+        className="absolute top-(--active-tab-top) left-(--active-tab-left) h-(--active-tab-height) w-(--active-tab-width) rounded-full bg-foreground transition-all duration-state motion-reduce:transition-none"
       />
     </TabsPrimitive.List>
   )
