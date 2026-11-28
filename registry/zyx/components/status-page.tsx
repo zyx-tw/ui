@@ -20,7 +20,7 @@ function StatusPage({
     <div data-slot="status-page" className="flex flex-col gap-10">
       <div className="flex flex-col gap-3">
         {command && <Command>{command}</Command>}
-        <h1 className="text-title font-medium">{title}</h1>
+        <h1 className="text-headline font-medium tracking-tight">{title}</h1>
       </div>
       {action}
       <Command>

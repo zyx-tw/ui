@@ -128,7 +128,7 @@ const sourceRules = [
   {
     name: "raw font size",
     regex:
-      /\bfont-size\s*:(?!\s*var\(--text-(?:display|title|body|caption)\))|\bfontSize\b/g,
+      /\bfont-size\s*:(?!\s*var\(--text-(?:display|headline|title|body|caption)\))|\bfontSize\b/g,
   },
 ];
 

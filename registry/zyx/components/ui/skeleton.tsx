@@ -1,13 +1,12 @@
 import { cn } from "../../lib/utils"
 
-// A placeholder of flickering pixels: a muted block under a field of 4px
-// pixels that reshuffles in steps (globals.css, Skeleton). Pure CSS, so it
-// shows before hydration.
+// A placeholder that breathes: a muted block whose opacity eases between 1
+// and 0.5 (globals.css, Skeleton). Pure CSS, so it shows before hydration.
 function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="skeleton"
-      className={cn("relative rounded-control bg-muted/40", className)}
+      className={cn("rounded-control bg-muted", className)}
       {...props}
     />
   )

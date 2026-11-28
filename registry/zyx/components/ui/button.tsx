@@ -6,17 +6,17 @@ import { FrameEdges } from "./frame"
 
 // One height for text and icon buttons; variants follow what the zyx.tw apps use.
 const buttonVariants = cva(
-  "inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-control text-body font-medium whitespace-nowrap transition-colors duration-state outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-control text-body font-medium whitespace-nowrap transition-[color,background-color,scale] duration-state outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 motion-safe:active:scale-98 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-primary/50 active:bg-background active:text-foreground",
+          "bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-primary/50 active:bg-primary/80",
         outline:
-          "group/outline relative bg-transparent focus-visible:ring-0 active:bg-foreground active:text-background",
-        ghost: "hover:bg-muted active:bg-foreground active:text-background",
+          "group/outline relative bg-transparent focus-visible:ring-0 active:bg-muted",
+        ghost: "hover:bg-muted active:bg-muted",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:ring-destructive/20 active:bg-destructive active:text-background",
+          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:ring-destructive/20 active:bg-destructive/25",
       },
       size: {
         default: "px-4",

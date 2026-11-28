@@ -47,7 +47,7 @@ export function Showcase({
   groups: DocGroup[];
 }) {
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-32">
       <Group
         id="start"
         title="Get started"
@@ -62,7 +62,7 @@ export function Showcase({
           )}
         />
       </Group>
-      <div id="components" className="flex scroll-mt-5 flex-col gap-20">
+      <div id="components" className="flex scroll-mt-5 flex-col gap-32">
         {groups.map((group, index) => (
           <Group
             key={group.title}
@@ -75,7 +75,7 @@ export function Showcase({
                 <li key={item.name} className="border-b border-border">
                   <Link
                     href={`/${item.name}`}
-                    className="flex flex-col gap-1 py-4 transition-colors duration-state hover:text-muted-foreground sm:flex-row sm:gap-5"
+                    className="flex flex-col gap-1 py-3 transition-colors duration-state hover:text-muted-foreground sm:flex-row sm:gap-5"
                   >
                     <span className="font-medium sm:w-40 sm:shrink-0">
                       {item.title}

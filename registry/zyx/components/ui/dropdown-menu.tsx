@@ -8,7 +8,7 @@ import { cn } from "../../lib/utils"
 import { WindowEdges } from "./frame"
 
 const menuSurface =
-  "z-50 max-h-(--available-height) min-w-48 rounded-control shadow-window origin-(--transform-origin) overflow-x-hidden overflow-y-auto bg-background p-1 text-body text-foreground duration-overlay outline-none data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0"
+  "z-50 max-h-(--available-height) min-w-48 rounded-control shadow-window origin-(--transform-origin) overflow-x-hidden overflow-y-auto bg-background p-1 text-body text-foreground duration-overlay outline-none data-open:animate-in data-open:fade-in-0 data-open:zoom-in-96 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-96"
 
 const menuRow =
   "relative flex h-10 cursor-default items-center gap-2 rounded-inner px-3 outline-hidden select-none focus:bg-muted data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"

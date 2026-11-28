@@ -35,13 +35,20 @@ export function TaskShell({
           wide && "max-w-none lg:max-w-6xl 2xl:max-w-6xl"
         )}
       >
-        <h1 className={cn("text-title font-medium", enterRow(1))}>{title}</h1>
+        <h1
+          className={cn(
+            "text-headline font-medium tracking-tight",
+            enterRow(1)
+          )}
+        >
+          {title}
+        </h1>
         {description && (
           <p className={cn("mt-3 text-muted-foreground", enterRow(2))}>
             {description}
           </p>
         )}
-        <div className={cn("mt-15", enterRow(3))}>{children}</div>
+        <div className={cn("mt-20", enterRow(3))}>{children}</div>
       </main>
       <BottomCorners fade links={<LegalLinks />} />
     </>

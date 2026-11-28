@@ -12,7 +12,7 @@ This file is the design contract for every zyx.tw app. `bun run theme:check` and
 - **One stylesheet**: `registry/zyx/styles/globals.css` holds the tokens, the utilities and the keyframes. The registry's `base` item ships it. An app may add a stylesheet only for its own content, never to restyle a component.
 - **The registry**: `registry.json` publishes the same files to projects outside this repo. `shadcn build` writes `public/r/` from it. The `base` item (`registry:base`, `extends: "none"`) carries the tokens, utilities and fonts; `shadcn init https://ui.zyx.tw/r/base.json` sets up a project and registers `@zyx1121`.
 - **In sync by check**: `theme:check` fails when globals.css and the `base` item (plus the components' keyframes and animations) drift. CI also inits a fresh project from the built base, adds every component and builds it.
-- **Components import each other relatively** (`./button`), so the files work both here and in a project's `components/ui`. `cn` comes from `lib/utils` (`../../lib/utils`), which extends the `cn` package so the four type sizes survive next to a text color.
+- **Components import each other relatively** (`./button`), so the files work both here and in a project's `components/ui`. `cn` comes from `lib/utils` (`../../lib/utils`), which extends the `cn` package so the five type sizes survive next to a text color.
 
 ## Tokens
 
@@ -38,17 +38,18 @@ There is no `secondary`, `accent` or `card` (they duplicated `muted` or `backgro
 - **Muted text at 4.5:1**: `muted-foreground` reaches at least 4.5:1 on `background` and `muted` `oklch(0.5 0.01 70)`. Readable text never goes lighter (no `text-muted-foreground/50`); disabled controls are the only exception.
 - **Focus is the text color**: `ring` equals `foreground`, so focus is a box in the text color, not a soft gray ring.
 - **Lines are ink at low opacity**: `border` is the text color at 12% and `input` at 18%, so every line stays the same hue as the text on any fill.
-- **Highlights invert**: a hovered or focused link in running text (`terminal-link`) and the active tab swap `foreground` and `background`; the tab pill slides. Selected text takes the ink at 15%.
+- **Links thicken, tabs invert**: a link in running text (`terminal-link`) keeps a 1px underline and thickens it to 2px on hover; keyboard focus adds a 2px ring. The active tab is a pill in `foreground` with `background` text, and it slides. Selected text takes the ink at 15%.
 
 ### Type
 
-Four sizes by role, the same on phones and desktops. Tailwind's own sizes are cleared (`--text-*: initial`), so `text-sm` and friends do not exist.
+Five sizes by role, the same on phones and desktops. Tailwind's own sizes are cleared (`--text-*: initial`), so `text-sm` and friends do not exist.
 
 | Utility        | Size    | Use                                                                     |
 | -------------- | ------- | ----------------------------------------------------------------------- |
 | `text-display` | 80/80px | One oversized value per page: the time app's clock, a tool app's result |
-| `text-title`   | 24/32px | Page and dialog titles                                                  |
-| `text-body`    | 16/24px | Everything else: body, controls, tables, corners, section headings      |
+| `text-headline` | 40/48px | The page title, one per page, tracked tight                            |
+| `text-title`   | 24/32px | Dialog and sheet titles                                                 |
+| `text-body`    | 16/26px | Everything else: body, controls, tables, corners, section headings      |
 | `text-caption` | 14/20px | Timestamps, counts, code, chart axes                                    |
 
 - **Hierarchy by weight and color**: 400 for text, 500 for titles, section headings, labels and buttons. Secondary text is `text-muted-foreground`.
@@ -56,7 +57,7 @@ Four sizes by role, the same on phones and desktops. Tailwind's own sizes are cl
 - **One face**: Maple Mono NF CN sets everything, text, headings and code alike (`font-sans`, `font-heading` and `font-mono` are the same stack). Every glyph keeps its cell (0.6em), a Han character two, so text lines up on a character grid and digits never shift. The files are subset to Latin, symbols, box drawing and the Han characters the apps use (`registry/zyx/fonts/README.md`); other Han characters fall back to Noto Sans TC. Projects outside this repo load the same files from `https://ui.zyx.tw/fonts/`. That stylesheet also covers every other Han character in the face, in slices a page downloads only when its text needs them, so data in Chinese is set in the same face.
 - **Real styles only**: 400 and 500 (Maple's SemiBold) only, never synthesis, and no italic.
 - **Labels in capitals**: corner links and section headings are uppercase (`SectionTitle`); tooltips are lowercase, like a shell. Body text keeps its own case.
-- **No content exceptions**: Markdown, code, charts and notices use the same four sizes; change wrapping and layout instead.
+- **No content exceptions**: Markdown, code, charts and notices use the same five sizes; change wrapping and layout instead.
 
 ### Corners, frames and shadow
 
@@ -80,22 +81,23 @@ One corner radius for every box, so a button, a field and the menu it opens shar
 
 | Utility             | Duration       | Use                                                                                    |
 | ------------------- | -------------- | -------------------------------------------------------------------------------------- |
-| `duration-state`    | 150ms ease-out | A control changing state: hover, focus, check, switch, the tab highlight               |
-| `duration-overlay`  | 200ms ease-out | Something appearing or leaving: dialogs, menus, popovers, tooltips, the mark mirroring |
+| `duration-state`    | 150ms, strong ease-out | A control changing state: hover, focus, press, check, switch, the tab highlight |
+| `duration-overlay`  | 200ms, strong ease-out | Something appearing or leaving: dialogs, menus, popovers, tooltips, the mark mirroring |
 | `enter-row-<n>`     | n × 25ms delay | The page's staggered entrance (`enterRow`, below)                                      |
 | `animate-cursor`    | 1s, stepped    | The block cursor at an idle prompt (`Cursor`): on for half a second, off for half      |
 | `Spinner`           | 90ms steps     | Waiting with no measure: a 3 by 3 LED panel, its lit pixel running the edge            |
-| `Skeleton`          | 120ms steps    | Content on its way: a field of 4px pixels reshuffling                                  |
-| `Progress`          | per value      | Waiting with a measure: a bar filling pixel by pixel, its edge a Bayer dither          |
+| `Skeleton`          | 1.6s ease-in-out | Content on its way: a muted block breathing between full and half opacity |
+| `Progress`          | 200ms per change | Waiting with a measure: a pill track that fills smoothly                  |
 | `transition-column` | 300ms          | The column easing its width between breakpoints                                        |
 
 - **Page entrance: text decodes**: every app mounts `PageDecode` (`@/components/page-decode`) once in its root layout. A page's text starts scrambled and resolves left to right, 50ms per character (a long line within 600ms), row by row 25ms apart in document order, counting the top corners as row 0: the title is row 1, the subtitle row 2, each block after them one row further. The bottom corners come in at row 15 (375ms). Scrambled glyphs keep each character's cell (Han glyphs for Han characters), so nothing moves. Use `enterRow(n)` and `enterFooter` from `@/lib/layout`; the decoder reads the row from the class.
 - **Page exit: text scrambles**: following a link within the app first scrambles the page being left over 200ms, from the end of each line, then the next page decodes in. Something that draws its own characters (www.zyx.tw's ASCII mark) listens for `LEAVE_EVENT` and scrambles with the page.
 - **Both directions alike**: every animation runs the same way in and out: what zooms in zooms out, what fades in fades out, at the same duration. A select menu that sits over its trigger only fades, opening and closing.
 - **Entrances never move layout**: they change glyphs, opacity, masks, transforms and color only, so CLS stays 0.
-- **Windows do not zoom**: menus, dialogs, tooltips and toasts fade in and out at `duration-overlay`; a terminal window does not scale or slide. A tooltip opened while another is still up (`data-instant`) appears at once.
+- **Windows grow in from where they open**: menus, popovers, tooltips and dialogs fade in while they scale from 96% to 100% from their origin, and leave the same way, at `duration-overlay`. A select menu that sits over its trigger only fades. Toasts slide up from the bottom edge with Sonner's own motion. A tooltip opened while another is still up (`data-instant`) appears at once.
+- **One ease**: every transition uses `cubic-bezier(0.22, 1, 0.36, 1)`, fast at the start with a long soft landing, as Stripe and Link move.
 - **Never wait on the effect**: a click, a tap or a key while a page decodes shows it whole at once, and a link followed from the keyboard skips the scramble out.
-- **A press inverts the cell**: a held button swaps its colors, as a terminal highlights a key. Nothing scales.
+- **A press sinks**: a held button darkens its fill and scales to 98%; nothing inverts.
 - **Reduced motion covers everything**: our animations sit behind `motion-safe:`, and globals.css cuts every animation and transition to 1ms under `prefers-reduced-motion: reduce` (1ms keeps the end events Base UI waits for).
 - `tokens:check` rejects other durations (`duration-300`) and delays.
 
@@ -118,10 +120,10 @@ The interface is flat and has exactly two layers.
 
 A page is one centered column on a 4px grid, framed by the four corners of the viewport, and the spacing between its parts moves in steps of 20px.
 
-- **4px grid**: every spacing, size and line height is a multiple of 4px. Half steps of 2px are for optical corrections and the inside of controls only.
-- **20px module**: spacing between page parts is a multiple of 20px: demos `gap-15`, groups `gap-20`, hero to content `pb-25`, the top of the page to the title `pt-30`. Inside a part the 4px grid rules (12px from a title to its subtitle).
+- **4px grid**: every spacing and size is a multiple of 4px; line heights may take a 2px half step (body 26px). Half steps of 2px are also for optical corrections and the inside of controls.
+- **Rhythm: air between parts, tight inside**: the top of the page to the title `pt-44` (176px), the hero to the content `pb-32`, groups `gap-32` (128px), a page's blocks `mt-20` (80px). Inside a part the spacing stays tight: 12px from a title to its subtitle, 20px to the text below, list rows `py-3`.
 - **Spotlight pages**: a page about one thing (a component page on ui.zyx.tw, a result) centers its content on both axes in the column and falls back to scrolling from the top when it is taller than the viewport.
-- **One column**: `column` from `@/lib/layout`, 576, 768 and 1024px wide with 12px gutters (`--gutter`), the same inset the corners have, so on a phone the text starts under the mark. `page` adds the 120px top and 100px bottom space.
+- **One column**: `column` from `@/lib/layout`, 576, 768 and 1024px wide with 12px gutters (`--gutter`), the same inset the corners have, so on a phone the text starts under the mark. `page` adds the 176px top and 144px bottom space.
 - **Four corners**: the chrome of every app is four fixed corners, 12px (`--gutter`) in from the viewport's corners, 16px between items, all `text-body`, links in capitals (`cornerLink`). A page nav marks the current page in brackets, `[WORKS]`, with `CornerLabel`; the brackets hang outside the label, invisible on the other labels, so the last label's text lines up with the corner's edge and nothing shifts, and the nav takes `gap-7`. Top left is always the zyx mark (to www.zyx.tw; to `/` on www.zyx.tw itself), which mirrors itself on hover. Beside it goes the path to the current page as a breadcrumb, `/ WORKS / AINTERN` (`trail`): every step but the last is a link, and on a phone only the last step shows. www.zyx.tw's home has none; every other site starts its trail with its own name, `/ GOLEM`, linking to its home once a page is below it. Top right holds the page nav and the page's function buttons. Every item there is a text link in the corner link style (`cornerLink`), never an icon button: a signed-in app shows `Sign out` and nothing else it can do without. Bottom left is Privacy and Terms and nothing else (`LegalLinks`). Bottom right is the copyright. They come from `@/components/corners`, published as `@zyx1121/corners`; an app leaves a corner empty rather than filling it with something else. An app's own working surface is content, not chrome: Plump's toolbar stays at the bottom center of its canvas.
 - **TV frame**: opt in with `tv` on `<html>`: a 16px black bezel, a screen with 16px round corners (`--screen-radius`), a dark glow at the screen's edge and faint scanlines; the corners then sit 12px in from the screen. No zyx.tw site wears it, so every site's corners sit 12px from the viewport.
 - **Corner tips**: an item in a corner can carry a tip (`CornerTip`) that says what its label leaves out; it never restates a text label. Tips open at once, toward the page; touch never opens them.

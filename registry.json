@@ -7,7 +7,7 @@
       "name": "base",
       "type": "registry:base",
       "title": "zyx Base",
-      "description": "The zyx.tw design system base: a terminal look in one monospace face on one soft white theme, four type sizes, one corner radius, a window shadow and two motion durations.",
+      "description": "The zyx.tw design system base: a terminal look in one monospace face on one soft white theme, five type sizes, one corner radius, a window shadow and two motion durations.",
       "author": "zyx1121 (https://github.com/zyx1121)",
       "categories": ["theme", "base"],
       "docs": "Use when: Starting any project on the zyx.tw look: tokens, fonts, type sizes, motion durations.\nNot for: Changing a single color; edit the tokens in your own globals.css instead.\nFonts: put <link rel=\"stylesheet\" href=\"https://ui.zyx.tw/fonts/maple-mono-nf-cn.css\"> in the document head (index.html, or <head> in the root layout). A CSS @import of it after Tailwind is dropped.\nGuide: https://ui.zyx.tw/index.md",
@@ -44,25 +44,30 @@
         "@utility duration-state": {
           "--tw-duration": "150ms",
           "transition-duration": "150ms",
-          "--tw-ease": "cubic-bezier(0, 0, 0.2, 1)",
-          "transition-timing-function": "cubic-bezier(0, 0, 0.2, 1)"
+          "--tw-ease": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "transition-timing-function": "cubic-bezier(0.22, 1, 0.36, 1)"
         },
         "@utility duration-overlay": {
           "--tw-duration": "200ms",
           "transition-duration": "200ms",
-          "--tw-ease": "cubic-bezier(0, 0, 0.2, 1)",
-          "transition-timing-function": "cubic-bezier(0, 0, 0.2, 1)"
+          "--tw-ease": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "transition-timing-function": "cubic-bezier(0.22, 1, 0.36, 1)"
         },
         "@utility w-menu": {
           "width": "calc(var(--anchor-width) + 0.5rem)"
         },
         "@utility terminal-link": {
-          "&:hover, &:focus-visible": {
-            "background-color": "var(--foreground)",
-            "color": "var(--background)",
-            "text-decoration-line": "none",
-            "outline": "none",
-            "box-shadow": "0 0 0 2px var(--foreground)"
+          "text-decoration-thickness": "1px",
+          "text-underline-offset": "0.2em",
+          "transition": "text-decoration-thickness 150ms cubic-bezier(0.22, 1, 0.36, 1)",
+          "&:hover": {
+            "text-decoration-thickness": "2px"
+          },
+          "&:focus-visible": {
+            "text-decoration-thickness": "2px",
+            "outline": "2px solid var(--ring)",
+            "outline-offset": "2px",
+            "border-radius": "var(--radius-inner)"
           }
         },
         "@layer base": {
@@ -98,10 +103,12 @@
           "text-*": "initial",
           "text-display": "5rem",
           "text-display--line-height": "5rem",
+          "text-headline": "2.5rem",
+          "text-headline--line-height": "3rem",
           "text-title": "1.5rem",
           "text-title--line-height": "2rem",
           "text-body": "1rem",
-          "text-body--line-height": "1.5rem",
+          "text-body--line-height": "1.625rem",
           "text-caption": "0.875rem",
           "text-caption--line-height": "1.25rem",
           "font-sans": "var(--font-maple-mono, Maple Mono NF CN), var(--font-maple-mono-cjk, Maple Mono NF CN), var(--font-noto-sans-tc), ui-monospace, monospace",
@@ -134,7 +141,7 @@
       "name": "utils",
       "type": "registry:lib",
       "title": "Utils",
-      "description": "cn at @/lib/utils, aware of the four type sizes.",
+      "description": "cn at @/lib/utils, aware of the five type sizes.",
       "author": "zyx1121 (https://github.com/zyx1121)",
       "categories": ["lib"],
       "docs": "Use when: Merging class names with cn when you write a component.\nNot for: Runtime logic; it only joins classes.\nGuide: https://ui.zyx.tw/index.md",
@@ -1700,7 +1707,7 @@
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "Determinate bar that fills pixel by pixel with a dithered edge.",
+      "description": "Determinate bar that fills smoothly to its value.",
       "author": "zyx1121 (https://github.com/zyx1121)",
       "categories": ["feedback", "motion"],
       "docs": "Use when: Waiting with a measure: an upload or a download with a known size.\nNot for: Waiting without a measure; use spinner.\nGuide: https://ui.zyx.tw/progress.md",
@@ -1710,11 +1717,6 @@
         "related": ["spinner", "skeleton"]
       },
       "dependencies": ["cn"],
-      "css": {
-        "[data-slot=\"progress\"] canvas": {
-          "image-rendering": "pixelated"
-        }
-      },
       "files": [
         {
           "path": "registry/zyx/components/ui/progress.tsx",
@@ -1856,7 +1858,7 @@
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",
-      "description": "Placeholder of flickering 4px pixels, in CSS.",
+      "description": "Placeholder that breathes softly while content loads, in CSS.",
       "author": "zyx1121 (https://github.com/zyx1121)",
       "categories": ["feedback", "motion"],
       "docs": "Use when: Content on its way, in the shape it will take.\nNot for: Actions in progress; use spinner.\nGuide: https://ui.zyx.tw/skeleton.md",
@@ -1867,31 +1869,16 @@
       },
       "dependencies": ["cn"],
       "css": {
-        "[data-slot=\"skeleton\"]::before": {
-          "content": "\"\"",
-          "position": "absolute",
-          "inset": "0",
-          "background": "var(--muted)",
-          "mask-image": "url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'><rect x='8' y='8' width='4' height='4'/><rect x='8' y='0' width='4' height='4'/><rect x='8' y='4' width='4' height='4'/><rect x='12' y='12' width='4' height='4'/><rect x='0' y='0' width='4' height='4'/><rect x='4' y='0' width='4' height='4'/><rect x='0' y='8' width='4' height='4'/><rect x='0' y='12' width='4' height='4'/><rect x='4' y='4' width='4' height='4'/></svg>\")",
-          "mask-size": "16px 16px",
-          "animation": "pixel-flicker 480ms step-end infinite"
+        "[data-slot=\"skeleton\"]": {
+          "animation": "skeleton-breathe 1.6s ease-in-out infinite"
         },
-        "@keyframes pixel-flicker": {
-          "0%": {
-            "mask-position": "0 0"
-          },
-          "25%": {
-            "mask-position": "8px 4px"
-          },
+        "@keyframes skeleton-breathe": {
           "50%": {
-            "mask-position": "4px 12px"
-          },
-          "75%": {
-            "mask-position": "12px 8px"
+            "opacity": "0.5"
           }
         },
         "@media (prefers-reduced-motion: reduce)": {
-          "[data-slot=\"skeleton\"]::before": {
+          "[data-slot=\"skeleton\"]": {
             "animation": "none !important"
           }
         }
@@ -2016,19 +2003,6 @@
         "related": ["spinner"]
       },
       "dependencies": ["lucide-react", "sonner"],
-      "css": {
-        "[data-sonner-toast]": {
-          "transition-property": "opacity, height !important",
-          "transition-duration": "200ms !important",
-          "transition-timing-function": "cubic-bezier(0, 0, 0.2, 1) !important"
-        },
-        "[data-sonner-toast][data-expanded=\"false\"][data-front=\"false\"]": {
-          "--y": "translateY(calc(var(--lift-amount) * var(--toasts-before))) !important"
-        },
-        "[data-sonner-toast][data-removed=\"true\"][data-front=\"true\"][data-swipe-out=\"false\"]": {
-          "--y": "translateY(0) !important"
-        }
-      },
       "files": [
         {
           "path": "registry/zyx/components/ui/sonner.tsx",
