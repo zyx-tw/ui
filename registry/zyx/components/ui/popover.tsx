@@ -40,7 +40,7 @@ function PopoverContent({
         <PopoverPrimitive.Popup
           data-slot="popover-content"
           className={cn(
-            "relative z-50 flex w-72 origin-(--transform-origin) flex-col rounded-window bg-background p-1 text-body text-foreground shadow-window outline-hidden duration-overlay data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+            "relative z-50 flex w-72 origin-(--transform-origin) flex-col rounded-control bg-background p-1 text-body text-foreground shadow-window outline-hidden duration-overlay data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
             className
           )}
           {...props}

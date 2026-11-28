@@ -90,13 +90,13 @@ const classRules = [
     name: "arbitrary value",
     regex: /(?<![\w-])-?[a-z][\w-]*-\[[^\]\s]+\](?![:/\]])/g,
   },
-  // Corners come from the radius tokens: inner (small marks such as a
-  // checkbox), control (fields, buttons, rows), window (layer-2 surfaces) and
-  // full (pills, dots), or none to clear one.
+  // One corner radius (DESIGN.md, Corners): control on every box, inner for
+  // a row inside a window (control less the window's 4px padding) and the
+  // checkbox, full for pills, or none to clear a library's radius.
   {
-    name: "radius (use rounded-control, rounded-window or rounded-full)",
+    name: "radius (use rounded-control, rounded-inner or rounded-full)",
     regex:
-      /\brounded(?:-(?:t|b|l|r|s|e|tl|tr|bl|br|ss|se|es|ee))?(?!-(?:none|inner|control|window|full)\b)(?:-[\w-]+)?(?![\w-])/g,
+      /\brounded(?:-(?:t|b|l|r|s|e|tl|tr|bl|br|ss|se|es|ee))?(?!-(?:none|inner|control|full)\b)(?:-[\w-]+)?(?![\w-])/g,
   },
   {
     name: "palette color",
