@@ -57,7 +57,7 @@ function facts(item: RegistryItem): [string, React.ReactNode][] {
           <Link
             key={name}
             href={`/${name}`}
-            className="underline underline-offset-4 transition-colors duration-state hover:text-muted-foreground"
+            className="terminal-link underline"
           >
             {getDoc(name)?.title}
           </Link>
@@ -93,7 +93,9 @@ export default async function ComponentPage({
         "flex flex-1 flex-col items-center justify-center text-center"
       )}
     >
-      <h1 className={cn("text-title font-medium", enterRow(1))}>
+      <h1
+        className={cn("text-headline font-medium tracking-tight", enterRow(1))}
+      >
         {item.title}
       </h1>
       <p className={cn("mt-3 text-muted-foreground", enterRow(2))}>
@@ -102,7 +104,7 @@ export default async function ComponentPage({
       {hasDemo(item.name) && (
         <div
           className={cn(
-            "mt-15 flex w-full flex-col items-center text-left",
+            "mt-20 flex w-full flex-col items-center text-left",
             enterRow(3)
           )}
         >
@@ -111,11 +113,11 @@ export default async function ComponentPage({
       )}
       <CopyCommand
         command={installCommand(item.name)}
-        className={cn("mt-15 text-muted-foreground", enterRow(4))}
+        className={cn("mt-20 text-muted-foreground", enterRow(4))}
       />
       <dl
         className={cn(
-          "mt-15 flex w-full max-w-2xl flex-col gap-3 text-left text-caption",
+          "mt-20 flex w-full max-w-2xl flex-col gap-3 text-left text-caption",
           enterRow(5)
         )}
       >

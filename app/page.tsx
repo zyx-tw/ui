@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className={cn(column, "flex-1 pt-30 pb-25")}>
+    <main className={cn(column, "flex-1 pt-44 pb-36")}>
       <Hero />
       <Showcase initCommand={INIT_COMMAND} groups={DOC_GROUPS} />
     </main>
