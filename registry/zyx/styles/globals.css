@@ -25,9 +25,8 @@
   --text-body--line-height: 1.5rem;
   --text-caption: 0.875rem;
   --text-caption--line-height: 1.25rem;
-  --radius-inner: 0.25rem;
-  --radius-control: 0.5rem;
-  --radius-window: 0.875rem;
+  --radius-inner: 0.375rem;
+  --radius-control: 0.625rem;
   --shadow-window:
     0 12px 32px -8px oklch(0.24 0.012 60 / 18%),
     0 4px 8px -4px oklch(0.24 0.012 60 / 10%);
@@ -82,7 +81,7 @@
   --border: oklch(0.24 0.012 60 / 12%);
   --input: oklch(0.24 0.012 60 / 18%);
   --ring: oklch(0.24 0.012 60);
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 }
 
 /* Motion: state changes (hover, toggle, tab) take 150ms, overlays 200ms. */

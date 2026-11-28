@@ -60,16 +60,15 @@ Four sizes by role, the same on phones and desktops. Tailwind's own sizes are cl
 
 ### Corners, frames and shadow
 
-Three radii, one per kind of shape, from the radius tokens. `tokens:check` rejects any other `rounded-*` and any border-radius literal.
+One corner radius for every box, so a button, a field and the menu it opens share their corners. `tokens:check` rejects any other `rounded-*` and any border-radius literal.
 
-| Utility           | Radius | Use                                                                          |
-| ----------------- | ------ | ---------------------------------------------------------------------------- |
-| `rounded-inner`   | 4px    | Small marks inside a row: the checkbox                                       |
-| `rounded-control` | 8px    | Buttons, fields, toggles, menu rows, code blocks, skeletons, calendar days    |
-| `rounded-window`  | 14px   | Layer-2 surfaces: dialogs, popovers, menus, tooltips, toasts, the toolbar     |
-| `rounded-full`    | pill   | Switches, sliders, progress, badges, avatars, the active tab                  |
+| Utility           | Radius | Use                                                                                  |
+| ----------------- | ------ | ------------------------------------------------------------------------------------ |
+| `rounded-control` | 10px   | Every box: buttons, fields, toggles, windows, code blocks, skeletons, calendar days  |
+| `rounded-inner`   | 6px    | A row inside a window, concentric with it (10px less the window's 4px padding); the checkbox |
+| `rounded-full`    | pill   | Switches, sliders, progress, badges, avatars, the active tab                         |
 
-`--radius` is 8px for libraries that read it. `rounded-none` clears a radius a library sets.
+`--radius` is 10px for libraries that read it. `rounded-none` clears a radius a library sets.
 
 - **Frames are a 1px line**: `FrameEdges` draws the outline of every window and field as a 1px line in its text color, `inset: 0` on the parent, with `border-radius: inherit`, so a component sets its radius once on itself. A sheet draws the one vertical edge that faces the page (`FrameSide`).
 - **Who draws one**: every layer-2 window, every field (input, textarea, input group, select and combobox triggers, the command input) and the outline button.
@@ -107,7 +106,7 @@ The interface is flat and has exactly two layers.
 | Layer     | What lives there                                                                                                                   | Surface                                                                                                                                                           |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1. Page   | Everything on the page when it loads: titles, text, lists, tables, forms, demos                                                    | None: no borders around groups, no shadows, no card backgrounds                                                                                                   |
-| 2. Window | Anything called up over the page or a working surface: dialog, alert dialog, sheet, menus, popovers, tooltips, toasts, the toolbar | A window: opaque `bg-background`, `rounded-window`, a 1px frame in `border` and `shadow-window`. Dialogs and alert dialogs are `bg-background/80` over their own 12px blur, so the page shows through them faintly and less than through the backdrop. Backdrops behind dialogs and sheets are a 12px blur alone with no tint |
+| 2. Window | Anything called up over the page or a working surface: dialog, alert dialog, sheet, menus, popovers, tooltips, toasts, the toolbar | A window: opaque `bg-background`, `rounded-control`, a 1px frame in `border` and `shadow-window`. Dialogs and alert dialogs are `bg-background/80` over their own 12px blur, so the page shows through them faintly and less than through the backdrop. Backdrops behind dialogs and sheets are a 12px blur alone with no tint |
 
 - Group page content with spacing and, where a line helps, a divider (`border-t` / `border-b`). Never wrap a group in a frame. `tokens:check` rejects `shadow-*` and a whole `border` in page code; only the components draw layer 2.
 - Controls keep their own outline: inputs, selects and outline buttons are controls, not containers.

@@ -81,7 +81,7 @@ function Frame({
   return (
     <div
       data-slot="frame"
-      className={cn("relative rounded-window px-4 py-4", className)}
+      className={cn("relative rounded-control px-4 py-4", className)}
       {...props}
     >
       {children}
