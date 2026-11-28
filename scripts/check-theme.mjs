@@ -114,6 +114,45 @@ for (const [, name] of css.matchAll(/@utility ([\w-]+\*?) \{/g)) {
   }
 }
 
+// Plain selector rules an item ships (a component's own CSS) must exist here
+// with the same values, so a project that adds the item gets what this site
+// shows. Every block for the selector counts; :root and selector lists are
+// left to the token checks above.
+const ruleProps = (selector) => {
+  const found = {};
+  let at = css.indexOf(`\n${selector} {`);
+  if (at === -1) return null;
+  while (at !== -1) {
+    const body = css.slice(at, css.indexOf("\n}", at + 1));
+    for (const m of body.matchAll(/^\s*([\w-]+)\s*:\s*([^;]+);/gm))
+      found[m[1]] = normalize(m[2]);
+    at = css.indexOf(`\n${selector} {`, at + 1);
+  }
+  return found;
+};
+for (const item of registry.items) {
+  for (const [rule, props] of Object.entries(item.css ?? {})) {
+    if (rule.startsWith("@") || rule.startsWith(":root") || rule.includes(","))
+      continue;
+    if (Object.values(props).some((value) => typeof value === "object"))
+      continue;
+    const actual = ruleProps(rule);
+    if (!actual) {
+      console.error(`globals.css has no rule ${rule} (from ${item.name})`);
+      failed = true;
+      continue;
+    }
+    for (const [name, value] of Object.entries(props)) {
+      if (actual[name] !== normalize(value)) {
+        console.error(
+          `${item.name} ${rule} ${name}: globals.css=${actual[name]} registry.json=${value}`
+        );
+        failed = true;
+      }
+    }
+  }
+}
+
 // Utilities and keyframes the registry ships must exist here too.
 for (const item of registry.items) {
   for (const rule of Object.keys(item.css ?? {})) {
